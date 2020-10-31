@@ -40,14 +40,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   });
   const [createGroup] = useCreateGroupMutation({
     onCompleted: () => {
-      
       refetchGroups();
+      setTitleNewGroup('')
+      setStudents(null)
     },
   });
   useEffect(() => {
     data && setActiveGroup(data.groups[0]);
   }, [data]);
-  console.log(titleNewGroup, students);
   return (
     <WithSideBar
       header={<>{activeGroup?.title || "Выберите группу"}</>}
@@ -114,7 +114,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             <Spinner size="large" />
           ) : (
             <Flex marginTop="40px" flexDirection="column">
-              {data.groups.length &&
+              {!!data.groups.length &&
                 data.groups.map((i) => (
                   <Link
                     onClick={() => setActiveGroup({ id: i.id, title: i?.title || "Название не задано"  })}
@@ -129,7 +129,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </div>,
       ]}
     >
-      {children}
+      asdasdas
     </WithSideBar>
   );
 };
