@@ -15,25 +15,32 @@ const WithSideBar: React.FC<Props> = ({
   blocks,
   lastBlock,
   header,
-  rightBlock
+  rightBlock,
 }) => {
   const user = useContext(UserContext);
-  console.log(user);
 
   return (
     <PageWithSidebar
       sidebar={
-        <Flex flexDirection="column">
-          <Flex flexDirection="column" flexFlow="1">
-            {blocks.map((i) => (
-              <Box>{i}</Box>
+        <Flex height="100%" flexDirection="column">
+          <Flex flexDirection="column" flexGrow="1">
+            {blocks.map((i, index) => (
+              <Box borderTop={index && "1px solid #4E5868"} padding="20px 35px">
+                {i}
+              </Box>
             ))}
           </Flex>
-          {lastBlock}
+          <Box borderTop="1px solid #4E5868" padding="20px 35px">
+            {lastBlock}
+          </Box>
         </Flex>
       }
     >
-      <Flex flexDirection="column" minHeight="100vh" borderLeft="1px solid #4E5868">
+      <Flex
+        flexDirection="column"
+        minHeight="100vh"
+        borderLeft="1px solid #4E5868"
+      >
         {header && (
           <Flex
             borderBottom="1px solid #4E5868"
@@ -45,10 +52,18 @@ const WithSideBar: React.FC<Props> = ({
           </Flex>
         )}
         <Flex flexGrow="2">
-          <Flex  width="50%" padding="40px 0 0 56px">{children}</Flex>
-          {
-            rightBlock && <Flex  borderLeft="1px solid #4E5868" width="50%" padding="40px 0 0 56px">{children}</Flex>
-          }
+          <Flex width="50%" padding="40px 0 0 56px">
+            {children}
+          </Flex>
+          {rightBlock && (
+            <Flex
+              borderLeft="1px solid #4E5868"
+              width="50%"
+              padding="40px 0 0 56px"
+            >
+              {children}
+            </Flex>
+          )}
         </Flex>
       </Flex>
     </PageWithSidebar>

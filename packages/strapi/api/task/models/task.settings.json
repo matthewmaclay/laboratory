@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tasks",
+  "info": {
+    "name": "task"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "exercises": {
+      "collection": "exercise",
+      "via": "task"
+    },
+    "group": {
+      "via": "tasks",
+      "model": "group"
+    }
+  }
+}

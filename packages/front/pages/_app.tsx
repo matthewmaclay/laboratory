@@ -34,13 +34,22 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const theme = {
-  InputField: {
+  SelectMenu: {
     defaultProps: {
       width: "100%",
       marginBottom: "20px",
     },
+
+    Button: {
+      styles: {
+        base: {
+          background: "#27303f",
+          borderColor: "#4c586a",
+        },
+      },
+    },
   },
-  SelectMenu: {
+  InputField: {
     defaultProps: {
       width: "100%",
       marginBottom: "20px",
@@ -98,6 +107,10 @@ export default function App({ Component, pageProps }: Props) {
       push("/signin");
     }
   }, [pathname]);
+  React.useEffect(() => {
+    window.localStorage.setItem("bb.mode", "dark");
+  }, []);
+
   return (
     <ApolloProvider client={apolloClient}>
       <UserProvider>

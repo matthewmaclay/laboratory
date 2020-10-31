@@ -7,8 +7,9 @@ import IndexTeacherPage from "components/pages/teacher";
 import IndexStudentPage from "components/pages/student";
 
 const Index = () => {
-  const { teacher } = useContext(UserContext);
-  if (teacher) return <IndexTeacherPage />;
+  const user = useContext(UserContext);
+  if (!user) return null;
+  if (user.teacher) return <IndexTeacherPage />;
   return <IndexStudentPage />;
 };
 
