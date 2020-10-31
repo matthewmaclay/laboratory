@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   strapi:
     image: strapi/strapi
@@ -6,14 +6,20 @@ services:
       - ./packages/strapi:/srv/app
       - ./packages/strapi/node_modules:/srv/app/node_modules
     ports:
-      - "127.0.0.1:1337:1337"
-  # front:
-  #   build: 
-  #     context: ./packages/front
-  #     dockerfile: ./packages/front/Dockerfile.dev
-  #   volumes:
-  #     - ./packages/front/src:/app/src
-  #     - ./packages/front/pages:/app/pages
-  #     - ./packages/front/public:/app/public
-  #   ports:
-  #     - "127.0.0.1:3000:3000"
+      - 127.0.0.1:1337:1337
+  front:
+    image: front:latest
+    #build:
+    #  context: ./packages/front
+    #  dockerfile: ./packages/front/Dockerfile
+    volumes:
+      - ./packages/front/src:/app/src
+      - ./packages/front/pages:/app/pages
+    ports:
+      - 127.0.0.1:3000:3000
+  pythonapi:
+    image: pythonapi:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 127.0.0.1:8000:8000
