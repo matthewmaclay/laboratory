@@ -10,8 +10,8 @@
   },
   "attributes": {
     "exercises": {
-      "collection": "exercise",
-      "via": "task"
+      "via": "task",
+      "collection": "exercise"
     },
     "group": {
       "via": "tasks",

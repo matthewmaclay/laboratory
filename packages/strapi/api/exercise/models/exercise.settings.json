@@ -18,8 +18,14 @@
       "component": "new.test"
     },
     "task": {
-      "via": "exercises",
-      "model": "task"
+      "model": "task",
+      "via": "exercises"
+    },
+    "point": {
+      "type": "integer"
+    },
+    "timer": {
+      "type": "integer"
     }
   }
 }

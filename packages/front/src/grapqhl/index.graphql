@@ -226,7 +226,7 @@ mutation createEmptyExercise($taskId: ID) {
 
 mutation createEmptyTask($groupId: ID) {
   createTask(input: { data: { group: $groupId } }) {
-    task{
+    task {
       id
     }
   }
@@ -235,6 +235,9 @@ mutation createEmptyTask($groupId: ID) {
 query getExercisesByTaskId($id: ID!) {
   exercises(where: { task: $id }) {
     id
+    point
+    timer
+    description
   }
 }
 
@@ -246,6 +249,24 @@ query getExerciseById($id: ID!) {
         value
       }
       result
+    }
+  }
+}
+
+mutation updateExercise(
+  $id: ID!
+  $timer: Int
+  $point: Int
+  $description: String
+) {
+  updateExercise(
+    input: {
+      where: { id: $id }
+      data: { timer: $timer, description: $description, point: $point }
+    }
+  ) {
+    exercise {
+      id
     }
   }
 }
