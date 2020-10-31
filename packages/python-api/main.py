@@ -10,61 +10,6 @@ client.images.build(path="./", dockerfile=".docker/javascript.docker", tag="plat
 client.images.build(path="./", dockerfile=".docker/python.docker", tag="platform:python")
 app = FastAPI()
 
-DATA = '''
-{
-   "id":1,
-   "description":"super description",
-   "created_by":{
-      "id":1,
-      "firstname":"matthew",
-      "lastname":"maclay",
-      "username":"null"
-   },
-   "updated_by":{
-      "id":1,
-      "firstname":"matthew",
-      "lastname":"maclay",
-      "username":"null"
-   },
-   "created_at":"2020-10-31T10:47:11.487Z",
-   "updated_at":"2020-10-31T10:50:56.513Z",
-   "tests":[
-      {
-         "id":1,
-         "open":"false",
-         "language":"python",
-         "result":"happyp",
-         "args":[
-            {
-               "id":1,
-               "value":"happy"
-            },
-            {
-               "id":2,
-               "value":"p"
-            }
-         ]
-      },
-      {
-         "id":2,
-         "open":"false",
-         "language":"null",
-         "result":"aaaa",
-         "args":[
-            {
-               "id":3,
-               "value":"aaa"
-            },
-            {
-               "id":4,
-               "value":"a"
-            }
-         ]
-      }
-   ]
-}
-'''
-
 class Item(BaseModel):
     id: int
     language: str
@@ -73,12 +18,13 @@ class Item(BaseModel):
 
 @app.post("/check")
 async def script_check(item: Item):
-    formated_json = json.loads(DATA)
+    response = requests.get(f'https://admin.hack.dokub.xyz/exercises/{id}')
+    response_json = response.json()
     result_values = []
     tests_scripts = ""
     try:
         if item.language == "python":
-            for test in formated_json["tests"]:
+            for test in response_json["tests"]:
                 result_values.append(test["result"])
                 tests_scripts += f'print({item.func_name}{test["args"][0]["value"], test["args"][1]["value"]})\n'
             formated_script = f'{item.script}\n{tests_scripts}'
@@ -87,7 +33,7 @@ async def script_check(item: Item):
             return JSONResponse(content=json_res)
         elif item.language == "javascript":
             res = []
-            for test in formated_json["tests"]:
+            for test in response_json["tests"]:
                 result_values.append(test["result"])
                 tests_scripts = f'({item.script}){test["args"][0]["value"], test["args"][1]["value"]};'
                 res.append(client.containers.run(f'platform:{item.language}', f'"{tests_scripts}"').decode("utf-8").rstrip())
