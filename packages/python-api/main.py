@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+import requests
 import json
 
 client = docker.DockerClient(base_url='unix://var/run/docker.sock')
