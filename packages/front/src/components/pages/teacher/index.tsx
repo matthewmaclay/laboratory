@@ -34,7 +34,6 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { data: dataTasks } = useGetTasksByGroupIdQuery({
     variables: { groupId: activeGroup.id },
   });
-  console.log(dataTasks)
   const {
     data,
     error,
@@ -140,7 +139,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList />
+        <CourseList dataTasks={dataTasks}/>
       </Box>
     </WithSideBar>
   );

@@ -5,6 +5,7 @@ import EditorHeader from './header';
 import { Table } from 'bumbag'
 
 import { Flex, Box } from "bumbag";
+import { debuglog } from "util";
 
 const StyledCourseList = style.div`
 	display: flex;
@@ -38,7 +39,7 @@ const StyledLinks = style.div`
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 18px;
-	margin: 35px 62px 70px 13px;
+	margin: 35px 62px 107px 13px;
 
 	color: #FFFFFF;
 `
@@ -102,74 +103,81 @@ const mock = {
 	]
 }
 
-export default function CourseList() {
+export default function CourseList( { dataTasks } ) {
 	const [choseType, setType] = useState("Task");
 
 	function handleClick(type: string) {
 		setType(type)
 	}
-
-	if(choseType == 'Task') {
-		return (
-			<StyledCourseList>
-				<StyledHeader>
-					<EditorHeader fun={handleClick}/>
-				</StyledHeader>
-				<StyledCars >
-					<Flex flexDirection="row" flexWrap="wrap">
-						{mock.lessons.map((i) => (
-							<Link href={`/author/lesson/${i.id}/description`}>
-								<Box width="200px" 
-									height="196px" 
-									margin="23px" 
-									background="#617083"
-									box-shadow="1px 2px 24px rgba(0, 0, 0, 0.12)"
-									borderRadius="8px"
-									className="Card"
-								>
-										<>
-											<StyledLinks>
-												{i.title}
-											</StyledLinks>
-											<StyledStatus>
-												Завершить <data>{i.time}</data>		
-											</StyledStatus>
-										</>
-								</Box>
-							</Link>
-						))}
-					</Flex>
-				</StyledCars>
-			</StyledCourseList>
-		);
-	}
-	if(choseType == 'Stady') { 
+	if(dataTasks !== undefined) {
+		if(choseType == 'Task') {
+			return (
+				<StyledCourseList>
+					<StyledHeader>
+						<EditorHeader fun={handleClick}/>
+					</StyledHeader>
+					<StyledCars >
+						<Flex flexDirection="row" flexWrap="wrap">
+							{dataTasks.tasks.map((i) => (
+								<Link href={`/author/lesson/${i.id}/description`}>
+									<Box width="200px" 
+										height="196px" 
+										margin="23px" 
+										background="#617083"
+										box-shadow="1px 2px 24px rgba(0, 0, 0, 0.12)"
+										borderRadius="8px"
+										className="Card"
+									>
+											<>
+												<StyledLinks>
+													{`Задание ${i.id}`}
+												</StyledLinks>
+												<StyledStatus>
+													Завершено	
+												</StyledStatus>
+											</>
+									</Box>
+								</Link>
+							))}
+						</Flex>
+					</StyledCars>
+				</StyledCourseList>
+			);
+		}
+		if(choseType == 'Stady') { 
+			return(
+				<StyledCourseList>
+					<StyledHeader>
+						<EditorHeader fun={handleClick}/>
+					</StyledHeader>
+					<StyledSeparator />
+					<StyledTable>
+						<Table width="90%" color="#E0E4EA" isHoverable>
+							<Table.Head background="#171C26">
+								<Table.Row>
+									<Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
+									<Table.HeadCell textAlign="right" color="#E0E4EA">Средний балл</Table.HeadCell>
+								</Table.Row>
+							</Table.Head>
+							<Table.Body color="#E0E4EA">
+								{mock.stady.map(item=> {
+									return(
+										<Table.Row>
+											<Table.Cell>{item.name}</Table.Cell>
+											<Table.Cell textAlign="right">{item.point}</Table.Cell>
+										</Table.Row>
+									)})}
+							</Table.Body>
+						</Table>
+					</StyledTable>
+				</StyledCourseList>
+			)
+		}
+	} else {
 		return(
-			<StyledCourseList>
-				<StyledHeader>
-					<EditorHeader fun={handleClick}/>
-				</StyledHeader>
-				<StyledSeparator />
-				<StyledTable>
-					<Table width="90%" color="#E0E4EA" isHoverable>
-						<Table.Head background="#171C26">
-							<Table.Row>
-								<Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
-								<Table.HeadCell textAlign="right" color="#E0E4EA">Средний балл</Table.HeadCell>
-							</Table.Row>
-						</Table.Head>
-						<Table.Body color="#E0E4EA">
-							{mock.stady.map(item=> {
-								return(
-									<Table.Row>
-										<Table.Cell>{item.name}</Table.Cell>
-										<Table.Cell textAlign="right">{item.point}</Table.Cell>
-									</Table.Row>
-								)})}
-						</Table.Body>
-					</Table>
-				</StyledTable>
-			</StyledCourseList>
+			<div>
+				Ожидание...
+			</div>
 		)
 	}
 }
