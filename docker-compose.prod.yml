@@ -5,8 +5,6 @@ services:
     volumes:
       - ./packages/strapi:/srv/app
       - ./packages/strapi/node_modules:/srv/app/node_modules
-    ports:
-      - "127.0.0.1:1337:1337"
   front:
     image: front:latest
     #build:
@@ -15,18 +13,7 @@ services:
     volumes:
       - ./packages/front/src:/app/src
       - ./packages/front/pages:/app/pages
-    ports:
-      - "127.0.0.1:3000:3000"
-  # api:
-  #   build: ./packages/apiValidator
-  #   ports:
-  #     - "127.0.0.1:3001:3000"
   pythonapi:
     image: pythonapi:latest
-#    build:
-#      dockerfile: ./packages/python-api/Dockerfile
-#      context: ./packages/python-api
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - "127.0.0.1:8000:8000"
