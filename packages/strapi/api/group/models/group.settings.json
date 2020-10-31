@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "groups",
+  "info": {
+    "name": "group"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "students": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "groups",
+      "dominant": true
+    },
+    "teacher": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "groupsWhereIamTeachers"
+    },
+    "tasks": {
+      "collection": "task",
+      "via": "group"
+    }
+  }
+}

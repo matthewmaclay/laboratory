@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "arguments",
+  "info": {
+    "name": "argument"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "arg": {
+      "type": "string"
+    }
+  }
+}

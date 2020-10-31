@@ -73,7 +73,6 @@ query me {
     username
     email
     confirmed
-
   }
 }
 
@@ -110,17 +109,27 @@ query users {
   }
 }
 
-query getUser($id:ID!){
-  user(id:$id){
+query getUser($id: ID!) {
+  user(id: $id) {
     patronymic
     lastName
     firstName
     birthday
     organization
     avatar
+    teacher
+    id
   }
 }
 
+query getStudents {
+  users(where: { teacher: false }) {
+    id
+    firstName
+    lastName
+    patronymic
+  }
+}
 mutation makeMeTeacher($id: ID!) {
   updateUser(input: { where: { id: $id }, data: { teacher: true } }) {
     user {
@@ -177,6 +186,21 @@ mutation updateUser(
     }
   ) {
     user {
+      id
+    }
+  }
+}
+
+query getGroupsWhereIamTeacher($id: ID!) {
+  groups(where: { teacher: $id }) {
+    title
+    id
+  }
+}
+
+mutation createGroup($students: [ID], $title: String, $teacher: ID) {
+  createGroup(input: { data: { students: $students, title: $title, teacher: $teacher } }) {
+    group {
       id
     }
   }
