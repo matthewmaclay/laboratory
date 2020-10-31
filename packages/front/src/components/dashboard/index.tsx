@@ -127,7 +127,7 @@ export default function CourseList({ dataTasks, activeGroupId, isStudent, dataUs
           </StyledHeader>
           <StyledCars>
             <Flex flexDirection="row" flexWrap="wrap">
-				{isStudent?"На вас еще не было назначено ни одной задачи":"В группе еще не добавлено заданий. <br />Создайте первое!"}
+				{isStudent?"На вас еще не было назначено ни одной задачи":"В группе еще не добавлено заданий. \n Создайте первое!"}
               
             </Flex>
           </StyledCars>
