@@ -11,6 +11,7 @@ import { UserContext } from "components/providers/UserProvider";
 import AvatarWithName from "components/AvatarWithName";
 import { Spinner, Flex, SelectMenu } from "bumbag";
 import styled from "styled-components";
+import CourseList from '../../dashboard/index';
 
 const SelectWrapper = styled.div`
   & .bb-SelectMenuItem[aria-selected="true"] {
@@ -129,7 +130,9 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </div>,
       ]}
     >
-      <Box width="100%" background="red">123</Box>
+      <Box width="100%">
+        <CourseList />
+      </Box>
     </WithSideBar>
   );
 };
