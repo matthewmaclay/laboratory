@@ -12,6 +12,8 @@ import "@babel/polyfill";
 import { useRouter } from "next/router";
 import { getToken } from "utils";
 import { debug } from "console";
+import { useGetUserQuery, useMeQuery } from "graphqlTypes";
+import UserProvider from "components/providers/UserProvider";
 
 const GlobalStyle = createGlobalStyle`
 	#__next {
@@ -87,27 +89,28 @@ interface Props {
 const PUBLIC_PAGES = ["/signin", "/signup"];
 export default function App({ Component, pageProps }: Props) {
   const apolloClient = useApollo(pageProps.initialApolloState);
+
   const { pathname, push } = useRouter();
   React.useEffect(() => {
     const isPublic = PUBLIC_PAGES.some((i) => i === pathname);
     const token = getToken();
-    window.a = palette
-
     if (!isPublic && !token) {
       push("/signin");
     }
   }, [pathname]);
   return (
     <ApolloProvider client={apolloClient}>
-      <BumbagProvider  theme={theme}>
-        <Head>
-          <link rel="stylesheet" href="/css/medium-editor.css" />
-          <link rel="stylesheet" href="/css/themes/bootstrap.css" />
-          <link rel="stylesheet" href="/css/tippy.css" />
-        </Head>
-        <Component {...pageProps} />
-        <GlobalStyle />
-      </BumbagProvider>
+      <UserProvider>
+        <BumbagProvider theme={theme}>
+          <Head>
+            <link rel="stylesheet" href="/css/medium-editor.css" />
+            <link rel="stylesheet" href="/css/themes/bootstrap.css" />
+            <link rel="stylesheet" href="/css/tippy.css" />
+          </Head>
+          <Component {...pageProps} />
+          <GlobalStyle />
+        </BumbagProvider>
+      </UserProvider>
     </ApolloProvider>
   );
 }

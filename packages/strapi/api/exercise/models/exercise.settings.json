@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exercises",
+  "info": {
+    "name": "exercise"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "tests": {
+      "type": "component",
+      "repeatable": true,
+      "component": "new.test"
+    }
+  }
+}

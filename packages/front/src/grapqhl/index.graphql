@@ -118,6 +118,7 @@ query getUser($id:ID!){
     birthday
     organization
     avatar
+    teacher
   }
 }
 
@@ -179,5 +180,13 @@ mutation updateUser(
     user {
       id
     }
+  }
+}
+
+
+query getGroupsWhereIamTeacher($id: ID!){
+  groups(where:{teacher: $id}){
+    title
+    id
   }
 }

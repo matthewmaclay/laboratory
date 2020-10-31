@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_new_tests",
+  "info": {
+    "name": "test",
+    "icon": "bolt"
+  },
+  "options": {},
+  "attributes": {
+    "open": {
+      "type": "boolean",
+      "default": false
+    },
+    "language": {
+      "type": "string"
+    },
+    "args": {
+      "type": "component",
+      "repeatable": true,
+      "component": "new.arg"
+    },
+    "result": {
+      "type": "string"
+    }
+  }
+}

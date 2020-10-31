@@ -25,9 +25,16 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  argument?: Maybe<Argument>;
   comment?: Maybe<Comment>;
   comments?: Maybe<Array<Maybe<Comment>>>;
   commentsConnection?: Maybe<CommentConnection>;
+  exercise?: Maybe<Exercise>;
+  exercises?: Maybe<Array<Maybe<Exercise>>>;
+  exercisesConnection?: Maybe<ExerciseConnection>;
+  group?: Maybe<Group>;
+  groups?: Maybe<Array<Maybe<Group>>>;
+  groupsConnection?: Maybe<GroupConnection>;
   lesson?: Maybe<Lesson>;
   lessons?: Maybe<Array<Maybe<Lesson>>>;
   lessonsConnection?: Maybe<LessonConnection>;
@@ -64,6 +71,48 @@ export type QueryCommentsArgs = {
 
 
 export type QueryCommentsConnectionArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryExerciseArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryExercisesArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryExercisesConnectionArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryGroupArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGroupsArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryGroupsConnectionArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
@@ -191,6 +240,23 @@ export type QueryUsersConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
+export type Argument = {
+  __typename?: 'Argument';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  arg?: Maybe<Scalars['String']>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+};
+
+
+export type AdminUser = {
+  __typename?: 'AdminUser';
+  id: Scalars['ID'];
+  username?: Maybe<Scalars['String']>;
+};
+
 export type Comment = {
   __typename?: 'Comment';
   id: Scalars['ID'];
@@ -203,7 +269,6 @@ export type Comment = {
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
 };
-
 
 export type ComponentNewMessage = {
   __typename?: 'ComponentNewMessage';
@@ -242,12 +307,6 @@ export enum Enum_Lesson_Status {
   Complete = 'complete'
 }
 
-
-export type AdminUser = {
-  __typename?: 'AdminUser';
-  id: Scalars['ID'];
-  username?: Maybe<Scalars['String']>;
-};
 
 export type CommentConnection = {
   __typename?: 'CommentConnection';
@@ -344,6 +403,258 @@ export type CommentAggregatorMin = {
 export type CommentAggregatorMax = {
   __typename?: 'CommentAggregatorMax';
   topOffset?: Maybe<Scalars['Float']>;
+};
+
+export type Exercise = {
+  __typename?: 'Exercise';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
+  tests?: Maybe<Array<Maybe<ComponentNewTest>>>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+};
+
+export type ComponentNewTest = {
+  __typename?: 'ComponentNewTest';
+  id: Scalars['ID'];
+  open?: Maybe<Scalars['Boolean']>;
+  language?: Maybe<Scalars['String']>;
+  args?: Maybe<Array<Maybe<ComponentNewArg>>>;
+  result?: Maybe<Scalars['String']>;
+};
+
+export type ComponentNewArg = {
+  __typename?: 'ComponentNewArg';
+  id: Scalars['ID'];
+  value?: Maybe<Scalars['String']>;
+};
+
+export type ExerciseConnection = {
+  __typename?: 'ExerciseConnection';
+  values?: Maybe<Array<Maybe<Exercise>>>;
+  groupBy?: Maybe<ExerciseGroupBy>;
+  aggregate?: Maybe<ExerciseAggregator>;
+};
+
+export type ExerciseGroupBy = {
+  __typename?: 'ExerciseGroupBy';
+  id?: Maybe<Array<Maybe<ExerciseConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<ExerciseConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<ExerciseConnectionUpdated_At>>>;
+  description?: Maybe<Array<Maybe<ExerciseConnectionDescription>>>;
+  created_by?: Maybe<Array<Maybe<ExerciseConnectionCreated_By>>>;
+  updated_by?: Maybe<Array<Maybe<ExerciseConnectionUpdated_By>>>;
+};
+
+export type ExerciseConnectionId = {
+  __typename?: 'ExerciseConnectionId';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseConnectionCreated_At = {
+  __typename?: 'ExerciseConnectionCreated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseConnectionUpdated_At = {
+  __typename?: 'ExerciseConnectionUpdated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseConnectionDescription = {
+  __typename?: 'ExerciseConnectionDescription';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseConnectionCreated_By = {
+  __typename?: 'ExerciseConnectionCreated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseConnectionUpdated_By = {
+  __typename?: 'ExerciseConnectionUpdated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ExerciseConnection>;
+};
+
+export type ExerciseAggregator = {
+  __typename?: 'ExerciseAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type Group = {
+  __typename?: 'Group';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  title?: Maybe<Scalars['String']>;
+  teacher?: Maybe<UsersPermissionsUser>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+  students?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
+};
+
+
+export type GroupStudentsArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type UsersPermissionsUser = {
+  __typename?: 'UsersPermissionsUser';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  username: Scalars['String'];
+  email: Scalars['String'];
+  provider?: Maybe<Scalars['String']>;
+  confirmed?: Maybe<Scalars['Boolean']>;
+  blocked?: Maybe<Scalars['Boolean']>;
+  role?: Maybe<UsersPermissionsRole>;
+  teacher?: Maybe<Scalars['Boolean']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  birthday?: Maybe<Scalars['String']>;
+  organization?: Maybe<Scalars['String']>;
+  patronymic?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+  groups?: Maybe<Array<Maybe<Group>>>;
+  groupsWhereIamTeachers?: Maybe<Array<Maybe<Group>>>;
+};
+
+
+export type UsersPermissionsUserGroupsArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type UsersPermissionsUserGroupsWhereIamTeachersArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type UsersPermissionsRole = {
+  __typename?: 'UsersPermissionsRole';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+  permissions?: Maybe<Array<Maybe<UsersPermissionsPermission>>>;
+  users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
+};
+
+
+export type UsersPermissionsRolePermissionsArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type UsersPermissionsRoleUsersArgs = {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type UsersPermissionsPermission = {
+  __typename?: 'UsersPermissionsPermission';
+  id: Scalars['ID'];
+  type: Scalars['String'];
+  controller: Scalars['String'];
+  action: Scalars['String'];
+  enabled: Scalars['Boolean'];
+  policy?: Maybe<Scalars['String']>;
+  role?: Maybe<UsersPermissionsRole>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+};
+
+export type GroupConnection = {
+  __typename?: 'GroupConnection';
+  values?: Maybe<Array<Maybe<Group>>>;
+  groupBy?: Maybe<GroupGroupBy>;
+  aggregate?: Maybe<GroupAggregator>;
+};
+
+export type GroupGroupBy = {
+  __typename?: 'GroupGroupBy';
+  id?: Maybe<Array<Maybe<GroupConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<GroupConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<GroupConnectionUpdated_At>>>;
+  title?: Maybe<Array<Maybe<GroupConnectionTitle>>>;
+  teacher?: Maybe<Array<Maybe<GroupConnectionTeacher>>>;
+  created_by?: Maybe<Array<Maybe<GroupConnectionCreated_By>>>;
+  updated_by?: Maybe<Array<Maybe<GroupConnectionUpdated_By>>>;
+};
+
+export type GroupConnectionId = {
+  __typename?: 'GroupConnectionId';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionCreated_At = {
+  __typename?: 'GroupConnectionCreated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionUpdated_At = {
+  __typename?: 'GroupConnectionUpdated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionTitle = {
+  __typename?: 'GroupConnectionTitle';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionTeacher = {
+  __typename?: 'GroupConnectionTeacher';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionCreated_By = {
+  __typename?: 'GroupConnectionCreated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupConnectionUpdated_By = {
+  __typename?: 'GroupConnectionUpdated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<GroupConnection>;
+};
+
+export type GroupAggregator = {
+  __typename?: 'GroupAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type LessonConnection = {
@@ -627,7 +938,7 @@ export type UploadFileRelatedArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Comment | CommentConnection | CommentAggregator | CommentAggregatorSum | CommentAggregatorAvg | CommentAggregatorMin | CommentAggregatorMax | CommentGroupBy | CommentConnectionId | CommentConnectionCreated_At | CommentConnectionUpdated_At | CommentConnectionTopOffset | CommentConnectionContent | CommentConnectionLesson | CommentConnectionCreated_By | CommentConnectionUpdated_By | CreateCommentPayload | UpdateCommentPayload | DeleteCommentPayload | Lesson | LessonConnection | LessonAggregator | LessonGroupBy | LessonConnectionId | LessonConnectionCreated_At | LessonConnectionUpdated_At | LessonConnectionTitle | LessonConnectionContent | LessonConnectionStatus | LessonConnectionTime | LessonConnectionUniq | LessonConnectionCreated_By | LessonConnectionUpdated_By | CreateLessonPayload | UpdateLessonPayload | DeleteLessonPayload | Project | ProjectConnection | ProjectAggregator | ProjectGroupBy | ProjectConnectionId | ProjectConnectionCreated_At | ProjectConnectionUpdated_At | ProjectConnectionName | ProjectConnectionCreated_By | ProjectConnectionUpdated_By | CreateProjectPayload | UpdateProjectPayload | DeleteProjectPayload | Stage | StageConnection | StageAggregator | StageGroupBy | StageConnectionId | StageConnectionCreated_At | StageConnectionUpdated_At | StageConnectionNumber | StageConnectionProject | StageConnectionCreated_By | StageConnectionUpdated_By | CreateStagePayload | UpdateStagePayload | DeleteStagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTeacher | UsersPermissionsUserConnectionFirstName | UsersPermissionsUserConnectionLastName | UsersPermissionsUserConnectionBirthday | UsersPermissionsUserConnectionOrganization | UsersPermissionsUserConnectionPatronymic | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentNewMessage | ComponentNewMetrics;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Argument | UpdateArgumentPayload | DeleteArgumentPayload | Comment | CommentConnection | CommentAggregator | CommentAggregatorSum | CommentAggregatorAvg | CommentAggregatorMin | CommentAggregatorMax | CommentGroupBy | CommentConnectionId | CommentConnectionCreated_At | CommentConnectionUpdated_At | CommentConnectionTopOffset | CommentConnectionContent | CommentConnectionLesson | CommentConnectionCreated_By | CommentConnectionUpdated_By | CreateCommentPayload | UpdateCommentPayload | DeleteCommentPayload | Exercise | ExerciseConnection | ExerciseAggregator | ExerciseGroupBy | ExerciseConnectionId | ExerciseConnectionCreated_At | ExerciseConnectionUpdated_At | ExerciseConnectionDescription | ExerciseConnectionCreated_By | ExerciseConnectionUpdated_By | CreateExercisePayload | UpdateExercisePayload | DeleteExercisePayload | Group | GroupConnection | GroupAggregator | GroupGroupBy | GroupConnectionId | GroupConnectionCreated_At | GroupConnectionUpdated_At | GroupConnectionTitle | GroupConnectionTeacher | GroupConnectionCreated_By | GroupConnectionUpdated_By | CreateGroupPayload | UpdateGroupPayload | DeleteGroupPayload | Lesson | LessonConnection | LessonAggregator | LessonGroupBy | LessonConnectionId | LessonConnectionCreated_At | LessonConnectionUpdated_At | LessonConnectionTitle | LessonConnectionContent | LessonConnectionStatus | LessonConnectionTime | LessonConnectionUniq | LessonConnectionCreated_By | LessonConnectionUpdated_By | CreateLessonPayload | UpdateLessonPayload | DeleteLessonPayload | Project | ProjectConnection | ProjectAggregator | ProjectGroupBy | ProjectConnectionId | ProjectConnectionCreated_At | ProjectConnectionUpdated_At | ProjectConnectionName | ProjectConnectionCreated_By | ProjectConnectionUpdated_By | CreateProjectPayload | UpdateProjectPayload | DeleteProjectPayload | Stage | StageConnection | StageAggregator | StageGroupBy | StageConnectionId | StageConnectionCreated_At | StageConnectionUpdated_At | StageConnectionNumber | StageConnectionProject | StageConnectionCreated_By | StageConnectionUpdated_By | CreateStagePayload | UpdateStagePayload | DeleteStagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTeacher | UsersPermissionsUserConnectionFirstName | UsersPermissionsUserConnectionLastName | UsersPermissionsUserConnectionBirthday | UsersPermissionsUserConnectionOrganization | UsersPermissionsUserConnectionPatronymic | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentNewArg | ComponentNewMessage | ComponentNewMetrics | ComponentNewTest;
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
@@ -658,6 +969,16 @@ export type UserPermissionsPasswordPayload = {
   ok: Scalars['Boolean'];
 };
 
+export type UpdateArgumentPayload = {
+  __typename?: 'updateArgumentPayload';
+  argument?: Maybe<Argument>;
+};
+
+export type DeleteArgumentPayload = {
+  __typename?: 'deleteArgumentPayload';
+  argument?: Maybe<Argument>;
+};
+
 export type CreateCommentPayload = {
   __typename?: 'createCommentPayload';
   comment?: Maybe<Comment>;
@@ -671,6 +992,36 @@ export type UpdateCommentPayload = {
 export type DeleteCommentPayload = {
   __typename?: 'deleteCommentPayload';
   comment?: Maybe<Comment>;
+};
+
+export type CreateExercisePayload = {
+  __typename?: 'createExercisePayload';
+  exercise?: Maybe<Exercise>;
+};
+
+export type UpdateExercisePayload = {
+  __typename?: 'updateExercisePayload';
+  exercise?: Maybe<Exercise>;
+};
+
+export type DeleteExercisePayload = {
+  __typename?: 'deleteExercisePayload';
+  exercise?: Maybe<Exercise>;
+};
+
+export type CreateGroupPayload = {
+  __typename?: 'createGroupPayload';
+  group?: Maybe<Group>;
+};
+
+export type UpdateGroupPayload = {
+  __typename?: 'updateGroupPayload';
+  group?: Maybe<Group>;
+};
+
+export type DeleteGroupPayload = {
+  __typename?: 'deleteGroupPayload';
+  group?: Maybe<Group>;
 };
 
 export type CreateLessonPayload = {
@@ -898,69 +1249,6 @@ export type UploadFileAggregatorMax = {
   width?: Maybe<Scalars['Float']>;
   height?: Maybe<Scalars['Float']>;
   size?: Maybe<Scalars['Float']>;
-};
-
-export type UsersPermissionsPermission = {
-  __typename?: 'UsersPermissionsPermission';
-  id: Scalars['ID'];
-  type: Scalars['String'];
-  controller: Scalars['String'];
-  action: Scalars['String'];
-  enabled: Scalars['Boolean'];
-  policy?: Maybe<Scalars['String']>;
-  role?: Maybe<UsersPermissionsRole>;
-  created_by?: Maybe<AdminUser>;
-  updated_by?: Maybe<AdminUser>;
-};
-
-export type UsersPermissionsRole = {
-  __typename?: 'UsersPermissionsRole';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  created_by?: Maybe<AdminUser>;
-  updated_by?: Maybe<AdminUser>;
-  permissions?: Maybe<Array<Maybe<UsersPermissionsPermission>>>;
-  users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
-};
-
-
-export type UsersPermissionsRolePermissionsArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type UsersPermissionsRoleUsersArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-export type UsersPermissionsUser = {
-  __typename?: 'UsersPermissionsUser';
-  id: Scalars['ID'];
-  created_at: Scalars['DateTime'];
-  updated_at: Scalars['DateTime'];
-  username: Scalars['String'];
-  email: Scalars['String'];
-  provider?: Maybe<Scalars['String']>;
-  confirmed?: Maybe<Scalars['Boolean']>;
-  blocked?: Maybe<Scalars['Boolean']>;
-  role?: Maybe<UsersPermissionsRole>;
-  teacher?: Maybe<Scalars['Boolean']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  birthday?: Maybe<Scalars['String']>;
-  organization?: Maybe<Scalars['String']>;
-  patronymic?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
-  created_by?: Maybe<AdminUser>;
-  updated_by?: Maybe<AdminUser>;
 };
 
 export type UsersPermissionsRoleConnection = {
@@ -1197,9 +1485,17 @@ export type DeleteUserPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  updateArgument?: Maybe<UpdateArgumentPayload>;
+  deleteArgument?: Maybe<DeleteArgumentPayload>;
   createComment?: Maybe<CreateCommentPayload>;
   updateComment?: Maybe<UpdateCommentPayload>;
   deleteComment?: Maybe<DeleteCommentPayload>;
+  createExercise?: Maybe<CreateExercisePayload>;
+  updateExercise?: Maybe<UpdateExercisePayload>;
+  deleteExercise?: Maybe<DeleteExercisePayload>;
+  createGroup?: Maybe<CreateGroupPayload>;
+  updateGroup?: Maybe<UpdateGroupPayload>;
+  deleteGroup?: Maybe<DeleteGroupPayload>;
   createLesson?: Maybe<CreateLessonPayload>;
   updateLesson?: Maybe<UpdateLessonPayload>;
   deleteLesson?: Maybe<DeleteLessonPayload>;
@@ -1232,6 +1528,11 @@ export type Mutation = {
 };
 
 
+export type MutationUpdateArgumentArgs = {
+  input?: Maybe<UpdateArgumentInput>;
+};
+
+
 export type MutationCreateCommentArgs = {
   input?: Maybe<CreateCommentInput>;
 };
@@ -1244,6 +1545,36 @@ export type MutationUpdateCommentArgs = {
 
 export type MutationDeleteCommentArgs = {
   input?: Maybe<DeleteCommentInput>;
+};
+
+
+export type MutationCreateExerciseArgs = {
+  input?: Maybe<CreateExerciseInput>;
+};
+
+
+export type MutationUpdateExerciseArgs = {
+  input?: Maybe<UpdateExerciseInput>;
+};
+
+
+export type MutationDeleteExerciseArgs = {
+  input?: Maybe<DeleteExerciseInput>;
+};
+
+
+export type MutationCreateGroupArgs = {
+  input?: Maybe<CreateGroupInput>;
+};
+
+
+export type MutationUpdateGroupArgs = {
+  input?: Maybe<UpdateGroupInput>;
+};
+
+
+export type MutationDeleteGroupArgs = {
+  input?: Maybe<DeleteGroupInput>;
 };
 
 
@@ -1372,6 +1703,16 @@ export type MutationEmailConfirmationArgs = {
   confirmation: Scalars['String'];
 };
 
+export type UpdateArgumentInput = {
+  data?: Maybe<EditArgumentInput>;
+};
+
+export type EditArgumentInput = {
+  arg?: Maybe<Scalars['String']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
 export type CreateCommentInput = {
   data?: Maybe<CommentInput>;
 };
@@ -1415,6 +1756,86 @@ export type EditComponentNewMessageInput = {
 };
 
 export type DeleteCommentInput = {
+  where?: Maybe<InputId>;
+};
+
+export type CreateExerciseInput = {
+  data?: Maybe<ExerciseInput>;
+};
+
+export type ExerciseInput = {
+  description?: Maybe<Scalars['String']>;
+  tests?: Maybe<Array<Maybe<ComponentNewTestInput>>>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type ComponentNewTestInput = {
+  open?: Maybe<Scalars['Boolean']>;
+  language?: Maybe<Scalars['String']>;
+  args?: Maybe<Array<Maybe<ComponentNewArgInput>>>;
+  result?: Maybe<Scalars['String']>;
+};
+
+export type ComponentNewArgInput = {
+  value?: Maybe<Scalars['String']>;
+};
+
+export type UpdateExerciseInput = {
+  where?: Maybe<InputId>;
+  data?: Maybe<EditExerciseInput>;
+};
+
+export type EditExerciseInput = {
+  description?: Maybe<Scalars['String']>;
+  tests?: Maybe<Array<Maybe<EditComponentNewTestInput>>>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type EditComponentNewTestInput = {
+  id?: Maybe<Scalars['ID']>;
+  open?: Maybe<Scalars['Boolean']>;
+  language?: Maybe<Scalars['String']>;
+  args?: Maybe<Array<Maybe<EditComponentNewArgInput>>>;
+  result?: Maybe<Scalars['String']>;
+};
+
+export type EditComponentNewArgInput = {
+  id?: Maybe<Scalars['ID']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type DeleteExerciseInput = {
+  where?: Maybe<InputId>;
+};
+
+export type CreateGroupInput = {
+  data?: Maybe<GroupInput>;
+};
+
+export type GroupInput = {
+  title?: Maybe<Scalars['String']>;
+  students?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  teacher?: Maybe<Scalars['ID']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type UpdateGroupInput = {
+  where?: Maybe<InputId>;
+  data?: Maybe<EditGroupInput>;
+};
+
+export type EditGroupInput = {
+  title?: Maybe<Scalars['String']>;
+  students?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  teacher?: Maybe<Scalars['ID']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type DeleteGroupInput = {
   where?: Maybe<InputId>;
 };
 
@@ -1571,6 +1992,8 @@ export type UserInput = {
   organization?: Maybe<Scalars['String']>;
   patronymic?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
+  groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  groupsWhereIamTeachers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1596,6 +2019,8 @@ export type EditUserInput = {
   organization?: Maybe<Scalars['String']>;
   patronymic?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
+  groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  groupsWhereIamTeachers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1621,6 +2046,12 @@ export type UsersPermissionsRegisterInput = {
   username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type ArgumentInput = {
+  arg?: Maybe<Scalars['String']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
 };
 
 export type FileInput = {
@@ -1792,7 +2223,7 @@ export type GetUserQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'UsersPermissionsUser' }
-    & Pick<UsersPermissionsUser, 'patronymic' | 'lastName' | 'firstName' | 'birthday' | 'organization' | 'avatar'>
+    & Pick<UsersPermissionsUser, 'patronymic' | 'lastName' | 'firstName' | 'birthday' | 'organization' | 'avatar' | 'teacher'>
   )> }
 );
 
@@ -1882,6 +2313,19 @@ export type UpdateUserMutation = (
       & Pick<UsersPermissionsUser, 'id'>
     )> }
   )> }
+);
+
+export type GetGroupsWhereIamTeacherQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetGroupsWhereIamTeacherQuery = (
+  { __typename?: 'Query' }
+  & { groups?: Maybe<Array<Maybe<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'title' | 'id'>
+  )>>> }
 );
 
 
@@ -2176,6 +2620,7 @@ export const GetUserDocument = gql`
     birthday
     organization
     avatar
+    teacher
   }
 }
     `;
@@ -2384,3 +2829,37 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const GetGroupsWhereIamTeacherDocument = gql`
+    query getGroupsWhereIamTeacher($id: ID!) {
+  groups(where: {teacher: $id}) {
+    title
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetGroupsWhereIamTeacherQuery__
+ *
+ * To run a query within a React component, call `useGetGroupsWhereIamTeacherQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGroupsWhereIamTeacherQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGroupsWhereIamTeacherQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetGroupsWhereIamTeacherQuery(baseOptions?: Apollo.QueryHookOptions<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>) {
+        return Apollo.useQuery<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>(GetGroupsWhereIamTeacherDocument, baseOptions);
+      }
+export function useGetGroupsWhereIamTeacherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>) {
+          return Apollo.useLazyQuery<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>(GetGroupsWhereIamTeacherDocument, baseOptions);
+        }
+export type GetGroupsWhereIamTeacherQueryHookResult = ReturnType<typeof useGetGroupsWhereIamTeacherQuery>;
+export type GetGroupsWhereIamTeacherLazyQueryHookResult = ReturnType<typeof useGetGroupsWhereIamTeacherLazyQuery>;
+export type GetGroupsWhereIamTeacherQueryResult = Apollo.QueryResult<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>;
