@@ -1,5 +1,5 @@
 # Labaratory
-## Run
+
 
 Приложение разбито на микросервисы, но на текущий момент хранится в монорепе(./packages). Для каждого из них написан Dockerfile:
 ```
@@ -12,18 +12,20 @@
 
 Для того, чтобы запустить, необходимо использовать docker-compose
 
-Для python-api временно используется docker.sock(dind) для сборки контейнеров для тестов и их выполнения.
+Для python-api временно используется **docker.sock (dind)** для сборки контейнеров для тестов и их выполнения.
+***
+**Так как docker-compose багнулся и не позволяет собрать билды с явным указанием Dockerfile, перед запуском compose необходимо сбилдить образы**
 
-Так как docker-compose багнулся и не позволяет собрать билды с явным указанием Dockerfile, перед запуском compose необходимо сбилдить образы
 
-Для dev среды: 
+*Для dev среды:*
+
 ```bash
 docker build -t front:latest -f ./packages/front/Dockerfile ./packages/front/
 docker build -t pythonapi:latest -f ./packages/python-api/Dockerfile ./packages/python-api/
 docker-compose -f docker-compose.dev.yml up
 ```
 
-В проде запущен docker swarm для быстрого обновления сервисов и билды контейнеров с оптимизацией.
+*В проде запущен docker swarm для быстрого обновления сервисов и билды контейнеров с оптимизацией.*
 
 ```bash
 docker swarm init
@@ -32,13 +34,13 @@ docker build -t pythonapi:latest -f ./packages/python-api/Dockerfile ./packages/
 docker stack deploy -c  docker-compose.prod.yml hack
 ```
 
-Если требуется обновление на проде, можно запустить команды.
+*Если требуется обновление на проде, можно запустить команды.*
 ```bash
 docker service update hack_pythonapi --image pythonapi:latest --force
 docker service update hack_front --image front:latest --force
 ```
-На репо запущен github actions. Поэтому при пуше в репо этот процесс запускается автоматически.
-
+**На репо запущен github actions. Поэтому при пуше в репо этот процесс запускается автоматически.**
+***
 Приложение доступно по следующим адресам:
 
 `https://hack.dokub.xyz` - временный домен для фронта
@@ -47,7 +49,9 @@ docker service update hack_front --image front:latest --force
 
 `https://hack.dokub.xyz/api/check` - временный роут для запуска кода ученика
 
-Пример json data для заведенной задачи:
+
+***
+*Пример json data для заведенной задачи:*
 ```json
 {
     "id":1,
