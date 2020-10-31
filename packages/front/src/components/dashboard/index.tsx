@@ -68,6 +68,12 @@ const StyledTable = style.div`
 	justify-content: center;
 `;
 
+const StyledAvatar = style.img`
+  width: 25px;
+  height: 25px;
+  margin-right: 10px; 
+`
+
 const mock = {
   lessons: [
     {
@@ -104,8 +110,10 @@ const mock = {
   ],
 };
 
-export default function CourseList({ dataTasks, activeGroupId, isStudent }) {
+export default function CourseList({ dataTasks, activeGroupId, isStudent, dataUsers}) {
   const [choseType, setType] = useState("Task");
+
+  console.log('dataUsers', dataUsers)
 
   function handleClick(type: string) {
     setType(type);
@@ -160,35 +168,43 @@ export default function CourseList({ dataTasks, activeGroupId, isStudent }) {
     );
   }
   if (choseType == "Stady") {
+    if (typeof dataUsers.users !== 'undefined')
+      return (
+        <StyledCourseList>
+          <StyledHeader>
+            <EditorHeader fun={handleClick} />
+          </StyledHeader>
+          <StyledSeparator />
+          <StyledTable>
+            <Table width="90%" color="#E0E4EA" isHoverable>
+              <Table.Head background="#171C26">
+                <Table.Row>
+                  <Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
+                  <Table.HeadCell textAlign="right" color="#E0E4EA">
+                    Средний балл
+                  </Table.HeadCell>
+                </Table.Row>
+              </Table.Head>
+              <Table.Body color="#E0E4EA">
+                {dataUsers.users.map((item) => {
+                  return (
+                    <Table.Row>
+                      <Table.Cell display="flex"><StyledAvatar src={item.avatar}></StyledAvatar>{`${item.firstName} ${item.patronymic} ${item.lastName}`}</Table.Cell>
+                      <Table.Cell textAlign="right">{Math.floor(Math.random() * 100)}</Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+            </Table>
+          </StyledTable>
+        </StyledCourseList>
+      );
     return (
       <StyledCourseList>
-        <StyledHeader>
-          <EditorHeader fun={handleClick} />
-        </StyledHeader>
-        <StyledSeparator />
-        <StyledTable>
-          <Table width="90%" color="#E0E4EA" isHoverable>
-            <Table.Head background="#171C26">
-              <Table.Row>
-                <Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
-                <Table.HeadCell textAlign="right" color="#E0E4EA">
-                  Средний балл
-                </Table.HeadCell>
-              </Table.Row>
-            </Table.Head>
-            <Table.Body color="#E0E4EA">
-              {mock.stady.map((item) => {
-                return (
-                  <Table.Row>
-                    <Table.Cell>{item.name}</Table.Cell>
-                    <Table.Cell textAlign="right">{item.point}</Table.Cell>
-                  </Table.Row>
-                );
-              })}
-            </Table.Body>
-          </Table>
-        </StyledTable>
+          <StyledHeader>
+            <EditorHeader fun={handleClick} />
+          </StyledHeader>
       </StyledCourseList>
-    );
+    )
   }
 }

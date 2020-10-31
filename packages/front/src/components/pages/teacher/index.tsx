@@ -151,7 +151,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks} />
+        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks} dataUsers={dataUsers} />
       </Box>
     </WithSideBar>
   );
