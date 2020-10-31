@@ -15,4 +15,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/admin/labaratory/ && git pull
-          docker-compose -f docker-compose.prod.yml down && docker-compose -f docker-compose.prod.yml up -d
+          docker build -t front:latest -f ./packages/front/Dockerfile ./packages/front/
+          docker build -t pythonapi:latest -f ./packages/python-api/Dockerfile ./packages/python-api/
+          docker service update hack_pythonapi --image pythonapi:latest --force
+          docker service update hack_front --image front:latest --force
