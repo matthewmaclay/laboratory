@@ -129,7 +129,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </div>,
       ]}
     >
-      asdasdas
+      <Box width="100%" background="red">123</Box>
     </WithSideBar>
   );
 };
