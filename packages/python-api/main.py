@@ -16,7 +16,6 @@ class Item(BaseModel):
     id: int
     language: str
     script: str
-    func_name: str
 
 @app.post("/check")
 async def script_check(item: Item):
@@ -28,7 +27,7 @@ async def script_check(item: Item):
         if item.language == "python":
             for test in response_json["tests"]:
                 result_values.append(test["result"])
-                tests_scripts += f'print({item.func_name}{test["args"][0]["value"], test["args"][1]["value"]})\n'
+                tests_scripts += f'print(runTest{test["args"][0]["value"], test["args"][1]["value"]})\n'
             formated_script = f'{item.script}\n{tests_scripts}'
             res = client.containers.run(f'platform:{item.language}', f'"{formated_script}"').decode("utf-8").split()
             json_res = jsonable_encoder({"result": f"{res == result_values}"})
