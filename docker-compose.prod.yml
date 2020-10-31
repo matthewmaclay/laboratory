@@ -17,3 +17,10 @@ services:
     image: pythonapi:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./packages/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
