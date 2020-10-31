@@ -40,8 +40,9 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   });
   const [createGroup] = useCreateGroupMutation({
     onCompleted: () => {
-      
       refetchGroups();
+      setTitleNewGroup('')
+      setStudents(null)
     },
   });
   useEffect(() => {
@@ -114,7 +115,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             <Spinner size="large" />
           ) : (
             <Flex marginTop="40px" flexDirection="column">
-              {data.groups.length &&
+              {!!data.groups.length &&
                 data.groups.map((i) => (
                   <Link
                     onClick={() => setActiveGroup({ id: i.id, title: i?.title || "Название не задано"  })}

@@ -98,20 +98,19 @@ const ChooseRole = () => {
           { label: "Ученик", value: "student" },
         ]}
       />
-
-      <InputField
-        type="text"
-        inputRef={register}
-        onChange={({ target }) => setFirst(target.value)}
-        name="firstName"
-        label="Имя"
-      />
       <InputField
         type="text"
         inputRef={register}
         onChange={({ target }) => setLast(target.value)}
         name="lastName"
         label="Фамилия"
+      />
+      <InputField
+        type="text"
+        inputRef={register}
+        onChange={({ target }) => setFirst(target.value)}
+        name="firstName"
+        label="Имя"
       />
       <InputField
         type="text"
@@ -133,23 +132,6 @@ const ChooseRole = () => {
         label="Образовательная организация"
       />
 
-      <OptionButtons
-        width="100%"
-        marginBottom="20px"
-        display="flex"
-        justifyContent="center"
-        defaultValue="desktop"
-        type="radio"
-        onChange={(theme) => {
-          setTheme(theme);
-          setColorMode(theme);
-        }}
-        value={theme}
-        options={[
-          { label: "Темная", value: "dark" },
-          { label: "Светлая", value: "default" },
-        ]}
-      />
       <Button disabled={!role} width="100%" onClick={onSubmit}>
         Сохранить
       </Button>
