@@ -2,10 +2,12 @@
 ## Run
 
 Приложение разбито на микросервисы, но на текущий момент хранится в монорепе(./packages). Для каждого из них написан Dockerfile:
+```
 1. Front(./packages/front) nextjs
 2. Strapi(./packages/strapi) Админка
 3. Python-api(./packages/python-api) fastapi
 4. nginx(./packages/nginx) ingress
+```
 
 
 Для того, чтобы запустить, необходимо использовать docker-compose
