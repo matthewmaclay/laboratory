@@ -151,7 +151,7 @@ export default function CourseList() {
 				</StyledHeader>
 				<StyledSeparator />
 				<StyledTable>
-					<Table width="80%" color="#E0E4EA" >
+					<Table width="80%" color="#E0E4EA" isHoverable>
 						<Table.Head background="#171C26">
 							<Table.Row>
 								<Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
