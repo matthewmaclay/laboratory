@@ -32,6 +32,14 @@ module.exports = (phase) => {
 
   // next.config.js object
   return withCSS({
+    async rewrites() {
+      return [
+        {
+          source: '/run-test',
+          destination: 'https://hack.dokub.xyz/api/check',
+        },
+      ]
+    },
     env,
     typescript: {
       // !! WARN !!

@@ -39,11 +39,10 @@ const TextWrapper = styled.div`
   }
 `;
 
+
+
 const IndexTeacherPage: React.FC = ({ children }) => {
   const [description, setDescription] = useState<string>();
-  const [copyDescription, setCopyDescription] = useState<string>();
-  const [timer, setTimer] = useState<number>();
-  const [point, setPoint] = useState<number>();
 
   const { query } = useRouter();
   const id = query.id as string;
@@ -54,10 +53,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       const exercise = dataExercises.exercises.find(
         (i) => i.id === activeTask.id
       );
-      setTimer(Number.isInteger(exercise.timer) ? exercise.timer : 20);
       setDescription(exercise.description);
-      setCopyDescription(exercise.description);
-      setPoint(Number.isInteger(exercise.point) ? exercise.point : 5);
     }
   }, [activeTask.id]);
   const {
@@ -70,21 +66,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         setActiveTask({ id: data.exercises[0].id, title: "Номер 1" });
     },
   });
-  const [createEmptyExercise] = useCreateEmptyExerciseMutation({
-    onCompleted: () => {
-      try {
-        refetchExercises();
-      } catch {}
-    },
-  });
 
-  const [updateExercise] = useUpdateExerciseMutation({
-    onCompleted: () => refetchExercises(),
-  });
-
-  const { data: dataExercise } = useGetExerciseByIdQuery({
-    variables: { id: activeTask.id },
-  });
   return (
     <WithSideBar
       header={<>{activeTask.title}</>}
@@ -128,8 +110,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </div>,
       ]}
       rightBlock={
-        <Flex marginTop="-40px" marginLeft="-61px" flexDirection="column" paddingLeft="5px" overflowX="hidden">
-          <CodeEditor/>
+        <Flex
+          marginTop="-40px"
+          marginLeft="-61px"
+          flexDirection="column"
+          paddingLeft="5px"
+          overflowX="hidden"
+        >
+          <CodeEditor id={activeTask.id} />
         </Flex>
       }
     >

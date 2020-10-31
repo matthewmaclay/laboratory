@@ -8,21 +8,36 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import { Flex, Button, Box } from "bumbag";
 
-export interface EditorProps {}
+export interface EditorProps {
+    id: string;
+}
 
-const CodeEditor: React.FC<EditorProps> = (props) => {
+const URL = "/run-test";
+
+const CodeEditor: React.FC<EditorProps> = ({id}) => {
   const [language, setLanguage] = useState("javascript");
-  console.log(language);
+  const [code, setCode] = useState("");
+  const submitTest = () => {
+    fetch(URL, {
+      method: "POST",
+      body: JSON.stringify({
+        id,
+        language,
+        script: code,
+      }),
+    });
+  };
   return (
     <Flex height="100%" flexDirection="column">
       <Box flexGrow="222">
         <AceEditor
-        //   defaultValue={props.content}
+          //   defaultValue={props.content}
           width="800px"
           height="100%"
+          fontSize={16}
           mode={language}
           theme="solarized_dark"
-        //   onChange={props.onChange}
+          onChange={setCode}
           name={"CODE EDITOR"}
           editorProps={{ $blockScrolling: true }}
         />
@@ -37,7 +52,9 @@ const CodeEditor: React.FC<EditorProps> = (props) => {
           onChange={({ target }) => setLanguage(target.value)}
           value={language}
         />
-        <Button palette="primary">ТЕСТ</Button>
+        <Button onClick={submitTest} palette="primary">
+          ТЕСТ
+        </Button>
       </Flex>
     </Flex>
   );

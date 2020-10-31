@@ -2652,6 +2652,14 @@ export type GetExercisesByTaskIdQuery = (
   & { exercises?: Maybe<Array<Maybe<(
     { __typename?: 'Exercise' }
     & Pick<Exercise, 'id' | 'point' | 'timer' | 'description'>
+    & { tests?: Maybe<Array<Maybe<(
+      { __typename?: 'ComponentNewTest' }
+      & Pick<ComponentNewTest, 'open' | 'result'>
+      & { args?: Maybe<Array<Maybe<(
+        { __typename?: 'ComponentNewArg' }
+        & Pick<ComponentNewArg, 'title' | 'value'>
+      )>>> }
+    )>>> }
   )>>> }
 );
 
@@ -2667,10 +2675,10 @@ export type GetExerciseByIdQuery = (
     & Pick<Exercise, 'id'>
     & { tests?: Maybe<Array<Maybe<(
       { __typename?: 'ComponentNewTest' }
-      & Pick<ComponentNewTest, 'result'>
+      & Pick<ComponentNewTest, 'open' | 'result'>
       & { args?: Maybe<Array<Maybe<(
         { __typename?: 'ComponentNewArg' }
-        & Pick<ComponentNewArg, 'value'>
+        & Pick<ComponentNewArg, 'title' | 'value'>
       )>>> }
     )>>> }
   )> }
@@ -3447,6 +3455,14 @@ export const GetExercisesByTaskIdDocument = gql`
     point
     timer
     description
+    tests {
+      open
+      args {
+        title
+        value
+      }
+      result
+    }
   }
 }
     `;
@@ -3481,7 +3497,9 @@ export const GetExerciseByIdDocument = gql`
   exercise(id: $id) {
     id
     tests {
+      open
       args {
+        title
         value
       }
       result

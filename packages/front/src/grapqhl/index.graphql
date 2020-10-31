@@ -248,6 +248,14 @@ query getExercisesByTaskId($id: ID!) {
     point
     timer
     description
+    tests {
+      open
+      args {
+        title
+        value
+      }
+      result
+    }
   }
 }
 
@@ -255,7 +263,9 @@ query getExerciseById($id: ID!) {
   exercise(id: $id) {
     id
     tests {
+      open
       args {
+        title
         value
       }
       result

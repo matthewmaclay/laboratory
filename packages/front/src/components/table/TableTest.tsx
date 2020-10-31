@@ -47,7 +47,6 @@ const FirstTable = style.div`
 
 
 const GenerateTable = ( props?: any ) => {
-
 	function generateState (mock) {
 		const result = {};
 		const Head = [];

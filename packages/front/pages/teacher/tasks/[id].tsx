@@ -40,6 +40,7 @@ const TextWrapper = styled.div`
 
 const IndexTeacherPage: React.FC = ({ children }) => {
   const [description, setDescription] = useState<string>();
+  const [tests, setTests] = useState();
   const [copyDescription, setCopyDescription] = useState<string>();
   const [timer, setTimer] = useState<number>();
   const [point, setPoint] = useState<number>();
@@ -53,10 +54,11 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       const exercise = dataExercises.exercises.find(
         (i) => i.id === activeTask.id
       );
-      setTimer(Number.isInteger(exercise.timer)?exercise.timer: 20);
+      setTimer(Number.isInteger(exercise.timer) ? exercise.timer : 20);
       setDescription(exercise.description);
+      setTests(exercise.tests);
       setCopyDescription(exercise.description);
-      setPoint(Number.isInteger(exercise.point)?exercise.point: 5);
+      setPoint(Number.isInteger(exercise.point) ? exercise.point : 5);
     }
   }, [activeTask.id]);
   const {
@@ -71,10 +73,9 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   });
   const [createEmptyExercise] = useCreateEmptyExerciseMutation({
     onCompleted: () => {
-      try{
+      try {
         refetchExercises();
-
-      } catch{}
+      } catch {}
     },
   });
 
@@ -85,6 +86,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { data: dataExercise } = useGetExerciseByIdQuery({
     variables: { id: activeTask.id },
   });
+  console.log();
   return (
     <WithSideBar
       header={<>{activeTask.title}</>}
@@ -143,7 +145,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             <Text opacity="0.6" marginBottom="20px">
               Эта какая-то таблица и она как-то работает
             </Text>
-            <TableTest></TableTest>
+            {tests && <TableTest mock={tests}></TableTest>}
           </Flex>
         )
       }
@@ -189,7 +191,6 @@ const IndexTeacherPage: React.FC = ({ children }) => {
                   id: activeTask.id,
                 },
               });
-            
             }}
             width="180px"
             marginTop="15px"
