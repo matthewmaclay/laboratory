@@ -168,7 +168,7 @@ export default function CourseList({ dataTasks, activeGroupId, isStudent, dataUs
     );
   }
   if (choseType == "Stady") {
-    if (typeof dataUsers.users !== 'undefined')
+    if (typeof dataUsers?.users !== 'undefined')
       return (
         <StyledCourseList>
           <StyledHeader>
@@ -186,7 +186,7 @@ export default function CourseList({ dataTasks, activeGroupId, isStudent, dataUs
                 </Table.Row>
               </Table.Head>
               <Table.Body color="#E0E4EA">
-                {dataUsers.users.map((item) => {
+                {dataUsers?.users.map((item) => {
                   return (
                     <Table.Row>
                       <Table.Cell display="flex"><StyledAvatar src={item.avatar}></StyledAvatar>{`${item.firstName} ${item.patronymic} ${item.lastName}`}</Table.Cell>
