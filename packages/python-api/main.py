@@ -19,7 +19,7 @@ class Item(BaseModel):
 
 @app.post("/check")
 async def script_check(item: Item):
-    response = requests.get(f'https://admin.hack.dokub.xyz/exercises/{id}')
+    response = requests.get(f'https://admin.hack.dokub.xyz/exercises/{item.id}')
     response_json = response.json()
     result_values = []
     tests_scripts = ""
