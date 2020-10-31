@@ -114,7 +114,7 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <ApolloProvider client={apolloClient}>
       <UserProvider>
-        <BumbagProvider theme={theme}>
+        <BumbagProvider colorMode="dark" theme={theme}>
           <Head>
             <link rel="stylesheet" href="/css/medium-editor.css" />
             <link rel="stylesheet" href="/css/themes/bootstrap.css" />
