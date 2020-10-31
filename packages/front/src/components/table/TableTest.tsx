@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import style from 'styled-components';
-import { Table } from 'bumbag';
-import { Button } from 'bumbag';
+import { Table, Button, CheckboxField } from 'bumbag';
 
 const StyledVariableTable = style.div`
   display: flex;
@@ -49,8 +48,8 @@ const FirstTable = style.div`
 const GenerateTable = (props) => {
 
   const [currentVariables, setVariables] = useState({
-    Head: [''],
-    row1: []
+    Head: ['String'],
+    row1: [false, '']
   });
 
   console.log(currentVariables)
@@ -91,11 +90,8 @@ const GenerateTable = (props) => {
     const value =  target.value;
     const name = target.name;
     const typeString = name.split(',');
-    console.log(typeString)
-    console.log(currentVariables)
     const rowValue = currentVariables[`row${typeString[0]}`];
-    rowValue[typeString[1]] = value;
-    console.log(name)
+    rowValue[+typeString[1] + 1] = value;
     setVariables({
       ...currentVariables, 
       [`row${typeString[0]}`]: rowValue
@@ -107,7 +103,20 @@ const GenerateTable = (props) => {
     const value =  target.value;
     const name = target.name;
     const rowValue = currentVariables[`row${+name + 1}`];
-    rowValue.push(value);
+    const index = currentVariables.Head.length + 1;
+    console.log(index)
+    rowValue[index] = value;
+    setVariables({
+      ...currentVariables, 
+      [`row${+name + 1}`]: rowValue
+    });
+  }
+
+  function choseRule(e) {
+    const status = e.target.checked;
+    const name = e.target.name;
+    const rowValue = currentVariables[`row${+name + 1}`];
+    rowValue[0] = status;
     setVariables({
       ...currentVariables, 
       [`row${+name + 1}`]: rowValue
@@ -120,6 +129,7 @@ const GenerateTable = (props) => {
         <Table className="addAnswers" isResponsive >
             <Table.Head>
               <Table.Row background="#171C26">
+                <Table.HeadCell color="#E0E4EA">Видимость для ученика</Table.HeadCell>
                 {currentVariables.Head.map((item, i) => {
                   return(
                     <Table.HeadCell key={i} padding="0">
@@ -136,6 +146,9 @@ const GenerateTable = (props) => {
                 if(i < Object.keys(currentVariables).length - 1) {
                   return (
                     <Table.Row>  
+                      <Table.Cell padding="0" display="flex" justifyContent="center" alignContent="center">
+                        <input type="checkbox" name={`${i}`} checked={currentVariables[`row${i + 1}`][0]} onChange={choseRule}/>
+                      </Table.Cell>
                       {currentVariables.Head.map((item, k) => {
                         return(
                           <Table.Cell padding="0">
