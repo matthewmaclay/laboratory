@@ -290,3 +290,12 @@ mutation updateExercise(
     }
   }
 }
+
+query getUsersByGroupId($id: ID) {
+  users(where: { groups_in: $id }) {
+    lastName
+    firstName
+    patronymic
+    avatar
+  }
+}

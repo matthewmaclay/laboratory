@@ -7,12 +7,13 @@ import {
   useGetGroupsWhereIamTeacherQuery,
   useGetStudentsQuery,
   useGetTasksByGroupIdQuery,
+  useGetUsersByGroupIdQuery,
 } from "graphqlTypes";
 import { UserContext } from "components/providers/UserProvider";
 import AvatarWithName from "components/AvatarWithName";
 import { Spinner, Flex, SelectMenu } from "bumbag";
 import styled from "styled-components";
-import CourseList from '../../dashboard/index';
+import CourseList from "../../dashboard/index";
 
 const SelectWrapper = styled.div`
   & .bb-SelectMenuItem[aria-selected="true"] {
@@ -33,7 +34,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { data: dataStudents } = useGetStudentsQuery();
   const { data: dataTasks } = useGetTasksByGroupIdQuery({
     variables: { groupId: activeGroup.id },
-    fetchPolicy:"network-only"
+    fetchPolicy: "network-only",
   });
   const {
     data,
@@ -50,10 +51,19 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       setStudents(null);
     },
   });
+ // юзеры тут
+  const {
+    data: dataUsers,
+  } = useGetUsersByGroupIdQuery({
+    variables: {
+      id: activeGroup.id,
+    },
+  });
+  console.log(dataUsers,'datausers')
   useEffect(() => {
     data && setActiveGroup(data.groups[0]);
   }, [data]);
-  console.log(dataTasks, activeGroup)
+  console.log(dataTasks, activeGroup);
   return (
     <WithSideBar
       header={<>{activeGroup?.title || "Выберите группу"}</>}
@@ -141,7 +151,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks}/>
+        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks} />
       </Box>
     </WithSideBar>
   );

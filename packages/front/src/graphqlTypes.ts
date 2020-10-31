@@ -2703,6 +2703,19 @@ export type UpdateExerciseMutation = (
   )> }
 );
 
+export type GetUsersByGroupIdQueryVariables = Exact<{
+  id?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type GetUsersByGroupIdQuery = (
+  { __typename?: 'Query' }
+  & { users?: Maybe<Array<Maybe<(
+    { __typename?: 'UsersPermissionsUser' }
+    & Pick<UsersPermissionsUser, 'lastName' | 'firstName' | 'patronymic' | 'avatar'>
+  )>>> }
+);
+
 
 export const GetLessonsDocument = gql`
     query getLessons($status: ENUM_LESSON_STATUS) {
@@ -3570,3 +3583,39 @@ export function useUpdateExerciseMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateExerciseMutationHookResult = ReturnType<typeof useUpdateExerciseMutation>;
 export type UpdateExerciseMutationResult = Apollo.MutationResult<UpdateExerciseMutation>;
 export type UpdateExerciseMutationOptions = Apollo.BaseMutationOptions<UpdateExerciseMutation, UpdateExerciseMutationVariables>;
+export const GetUsersByGroupIdDocument = gql`
+    query getUsersByGroupId($id: ID) {
+  users(where: {groups_in: $id}) {
+    lastName
+    firstName
+    patronymic
+    avatar
+  }
+}
+    `;
+
+/**
+ * __useGetUsersByGroupIdQuery__
+ *
+ * To run a query within a React component, call `useGetUsersByGroupIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUsersByGroupIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUsersByGroupIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetUsersByGroupIdQuery(baseOptions?: Apollo.QueryHookOptions<GetUsersByGroupIdQuery, GetUsersByGroupIdQueryVariables>) {
+        return Apollo.useQuery<GetUsersByGroupIdQuery, GetUsersByGroupIdQueryVariables>(GetUsersByGroupIdDocument, baseOptions);
+      }
+export function useGetUsersByGroupIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUsersByGroupIdQuery, GetUsersByGroupIdQueryVariables>) {
+          return Apollo.useLazyQuery<GetUsersByGroupIdQuery, GetUsersByGroupIdQueryVariables>(GetUsersByGroupIdDocument, baseOptions);
+        }
+export type GetUsersByGroupIdQueryHookResult = ReturnType<typeof useGetUsersByGroupIdQuery>;
+export type GetUsersByGroupIdLazyQueryHookResult = ReturnType<typeof useGetUsersByGroupIdLazyQuery>;
+export type GetUsersByGroupIdQueryResult = Apollo.QueryResult<GetUsersByGroupIdQuery, GetUsersByGroupIdQueryVariables>;
