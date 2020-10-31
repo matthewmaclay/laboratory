@@ -52,8 +52,6 @@ const GenerateTable = (props) => {
     row1: [false, '']
   });
 
-  console.log(currentVariables)
-
   function addNewVariables() {
     const head = currentVariables.Head;
     head.push('');

@@ -9,7 +9,7 @@ const StyledLessonHeader = style.div`
     display: flex;
     justify-content: space-between;
     height: 50px;
-    border-bottom: 2px solid #E0E0E0;
+    border-bottom: 2px solid #4E5868;
 
     .name.selected {
         color: #5454E2;
