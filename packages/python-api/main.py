@@ -19,13 +19,12 @@ class Item(BaseModel):
 
 @app.post("/check")
 async def script_check(item: Item):
-    response = requests.get(f'https://admin.hack.dokub.xyz/exercises/{item.id}')
-    response_json = response.json()
+    response = requests.get(f'https://admin.hack.dokub.xyz/exercises/{item.id}').json()
     result_values = []
     tests_scripts = ""
     try:
         if item.language == "python":
-            for test in response_json["tests"]:
+            for test in response["tests"]:
                 result_values.append(test["result"])
                 tests_scripts += f'print(runTest{test["args"][0]["value"], test["args"][1]["value"]})\n'
             formated_script = f'{item.script}\n{tests_scripts}'
@@ -34,7 +33,7 @@ async def script_check(item: Item):
             return JSONResponse(content=json_res)
         elif item.language == "javascript":
             res = []
-            for test in response_json["tests"]:
+            for test in response["tests"]:
                 result_values.append(test["result"])
                 tests_scripts = f'({item.script}){test["args"][0]["value"], test["args"][1]["value"]};'
                 res.append(client.containers.run(f'platform:{item.language}', f'"{tests_scripts}"').decode("utf-8").rstrip())
