@@ -30,7 +30,7 @@ async def script_check(item: Item):
                 tests_scripts += f'print(runTest{test["args"][0]["value"], test["args"][1]["value"]})\n'
             formated_script = f'{item.script}\n{tests_scripts}'
             res = client.containers.run(f'platform:{item.language}', f'"{formated_script}"').decode("utf-8").split()
-            json_res = jsonable_encoder({"result": f"{res == result_values}", "goodAnswer": res, "yourAnswer": result_values})
+            json_res = jsonable_encoder({"result": f"{res == result_values}", "goodAnswer": result_values, "yourAnswer": res})
             return JSONResponse(content=json_res)
         elif item.language == "javascript":
             res = []
@@ -38,7 +38,7 @@ async def script_check(item: Item):
                 result_values.append(test["result"])
                 tests_scripts = f'({item.script}){test["args"][0]["value"], test["args"][1]["value"]};'
                 res.append(client.containers.run(f'platform:{item.language}', f'"{tests_scripts}"').decode("utf-8").rstrip())
-            json_res = jsonable_encoder({"result": f"{res == result_values}", "goodAnswer": res, "yourAnswer": result_values})
+            json_res = jsonable_encoder({"result": f"{res == result_values}", "goodAnswer": result_values, "yourAnswer": res})
             return JSONResponse(content=json_res)
 
     except docker.errors.ContainerError as e:
