@@ -42,7 +42,10 @@ const ChooseRole = () => {
     if (data && data.user.firstName && data.user.lastName) router.push("/");
   }, [data]);
   const [updateUser] = useUpdateUserMutation({
-    onCompleted: () => router.push("/"),
+    onCompleted: () => {
+      router.push("/")
+      window.localStorage.setItem('refetchUser', 'true')
+    }
   });
   const onSubmit = () => {
     const {
@@ -69,9 +72,6 @@ const ChooseRole = () => {
     });
   };
 
-  const handleChangeTeacher = (value) => {
-    setIsTeacher(value === "teacher");
-  };
   if (!data || data.user.firstName) return <Spinner size="large" />;
 
   const avatar = `https://avatars.dicebear.com/api/bottts/${encodeURI(

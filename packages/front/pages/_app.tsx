@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { Provider as BumbagProvider, css, palette } from "bumbag";
 // import Pallete from "bumbag/src/theme/palette";
@@ -97,6 +97,7 @@ interface Props {
 }
 const PUBLIC_PAGES = ["/signin", "/signup"];
 export default function App({ Component, pageProps }: Props) {
+  const [refetchUser, setRefetchUser] = useState(false);
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   const { pathname, push } = useRouter();
@@ -106,6 +107,10 @@ export default function App({ Component, pageProps }: Props) {
     if (!isPublic && !token) {
       push("/signin");
     }
+    if (window.localStorage.getItem("refetchUser")) {
+      window.localStorage.removeItem("refetchUser");
+      setRefetchUser(true);
+    }
   }, [pathname]);
   React.useEffect(() => {
     window.localStorage.setItem("bb.mode", "dark");
@@ -113,7 +118,7 @@ export default function App({ Component, pageProps }: Props) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <UserProvider>
+      <UserProvider refetchUser={refetchUser}>
         <BumbagProvider colorMode="dark" theme={theme}>
           <Head>
             <link rel="stylesheet" href="/css/medium-editor.css" />

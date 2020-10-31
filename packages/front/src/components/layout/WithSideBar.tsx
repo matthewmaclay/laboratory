@@ -52,7 +52,7 @@ const WithSideBar: React.FC<Props> = ({
           </Flex>
         )}
         <Flex flexGrow="2">
-          <Flex width="50%" padding="40px 0 0 56px">
+          <Flex width={!rightBlock?"100%":"50%"} padding="40px 0 0 56px">
             {children}
           </Flex>
           {rightBlock && (
