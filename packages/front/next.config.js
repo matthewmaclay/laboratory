@@ -22,7 +22,7 @@ module.exports = (phase) => {
     STRAPI_URL: (() => {
       if (isDev) return "http://localhost:1337";
       if (isProd) {
-        return "production";
+        return "http://admin.hack.dokub.xyz";
       }
       if (isStaging) return "http://localhost:11639";
       return "RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)";
