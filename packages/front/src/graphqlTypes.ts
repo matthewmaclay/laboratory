@@ -2562,6 +2562,23 @@ export type GetGroupsWhereIamTeacherQuery = (
   )>>> }
 );
 
+export type GetGroupsWhereIamStudentQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetGroupsWhereIamStudentQuery = (
+  { __typename?: 'Query' }
+  & { groups?: Maybe<Array<Maybe<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'title' | 'id'>
+    & { students?: Maybe<Array<Maybe<(
+      { __typename?: 'UsersPermissionsUser' }
+      & Pick<UsersPermissionsUser, 'id'>
+    )>>> }
+  )>>> }
+);
+
 export type CreateGroupMutationVariables = Exact<{
   students?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title?: Maybe<Scalars['String']>;
@@ -3249,6 +3266,43 @@ export function useGetGroupsWhereIamTeacherLazyQuery(baseOptions?: Apollo.LazyQu
 export type GetGroupsWhereIamTeacherQueryHookResult = ReturnType<typeof useGetGroupsWhereIamTeacherQuery>;
 export type GetGroupsWhereIamTeacherLazyQueryHookResult = ReturnType<typeof useGetGroupsWhereIamTeacherLazyQuery>;
 export type GetGroupsWhereIamTeacherQueryResult = Apollo.QueryResult<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>;
+export const GetGroupsWhereIamStudentDocument = gql`
+    query getGroupsWhereIamStudent($id: ID!) {
+  groups(where: {students_in: $id}) {
+    title
+    id
+    students {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetGroupsWhereIamStudentQuery__
+ *
+ * To run a query within a React component, call `useGetGroupsWhereIamStudentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGroupsWhereIamStudentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGroupsWhereIamStudentQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetGroupsWhereIamStudentQuery(baseOptions?: Apollo.QueryHookOptions<GetGroupsWhereIamStudentQuery, GetGroupsWhereIamStudentQueryVariables>) {
+        return Apollo.useQuery<GetGroupsWhereIamStudentQuery, GetGroupsWhereIamStudentQueryVariables>(GetGroupsWhereIamStudentDocument, baseOptions);
+      }
+export function useGetGroupsWhereIamStudentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGroupsWhereIamStudentQuery, GetGroupsWhereIamStudentQueryVariables>) {
+          return Apollo.useLazyQuery<GetGroupsWhereIamStudentQuery, GetGroupsWhereIamStudentQueryVariables>(GetGroupsWhereIamStudentDocument, baseOptions);
+        }
+export type GetGroupsWhereIamStudentQueryHookResult = ReturnType<typeof useGetGroupsWhereIamStudentQuery>;
+export type GetGroupsWhereIamStudentLazyQueryHookResult = ReturnType<typeof useGetGroupsWhereIamStudentLazyQuery>;
+export type GetGroupsWhereIamStudentQueryResult = Apollo.QueryResult<GetGroupsWhereIamStudentQuery, GetGroupsWhereIamStudentQueryVariables>;
 export const CreateGroupDocument = gql`
     mutation createGroup($students: [ID], $title: String, $teacherId: String) {
   createGroup(input: {data: {students: $students, title: $title, teacherId: $teacherId}}) {

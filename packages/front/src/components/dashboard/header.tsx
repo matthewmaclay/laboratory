@@ -36,11 +36,11 @@ const StyledBlockButton = style.div`
 
 `;
 
-const EditorHeader = ({ fun, activeGroupId }) => {
+const EditorHeader = ({ fun, activeGroupId, isStudent }) => {
   const router = useRouter();
   const [createEmptyTaskMutation] = useCreateEmptyTaskMutation({
     onCompleted: (data) => {
-      router.push(`/teacher/tasks/${data.createTask.task.id}`)
+      router.push(`/teacher/tasks/${data.createTask.task.id}`);
     },
   });
   const [choseType, setType] = useState();
@@ -64,30 +64,33 @@ const EditorHeader = ({ fun, activeGroupId }) => {
         >
           Задания
         </StyledInput>
-        <StyledInput
-          className={`name ${choseType == "Stady" ? "selected" : ""}`}
-          onClick={() => {
-            choseTypeReq("Stady");
-            handleClick("Stady");
-          }}
-        >
-          Ученики
-        </StyledInput>
+        {!isStudent && (
+          <StyledInput
+            className={`name ${choseType == "Stady" ? "selected" : ""}`}
+            onClick={() => {
+              choseTypeReq("Stady");
+              handleClick("Stady");
+            }}
+          >
+            Ученики
+          </StyledInput>
+        )}
       </StyledBlockStatus>
-
-      <StyledBlockButton>
-        <Button variant="ghost" color="#E0E4EA">
-          Пригласить
-        </Button>
-        <Button
-          onClick={() =>
-            createEmptyTaskMutation({ variables: { groupId: activeGroupId } })
-          }
-          palette="primary"
-        >
-          + Создать задание
-        </Button>
-      </StyledBlockButton>
+      {!isStudent && (
+        <StyledBlockButton>
+          <Button variant="ghost" color="#E0E4EA">
+            Пригласить
+          </Button>
+          <Button
+            onClick={() =>
+              createEmptyTaskMutation({ variables: { groupId: activeGroupId } })
+            }
+            palette="primary"
+          >
+            + Создать задание
+          </Button>
+        </StyledBlockButton>
+      )}
     </StyledLessonHeader>
   );
 };

@@ -198,6 +198,16 @@ query getGroupsWhereIamTeacher($id: ID!) {
   }
 }
 
+query getGroupsWhereIamStudent($id: ID!) {
+  groups(where: { students_in: $id }) {
+    title
+    id
+    students {
+      id
+    }
+  }
+}
+
 mutation createGroup($students: [ID], $title: String, $teacherId: String) {
   createGroup(
     input: {

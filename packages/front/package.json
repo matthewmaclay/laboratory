@@ -26,6 +26,7 @@
     "medium-editor-tables": "^0.6.1",
     "next": "9.5.3",
     "react": "^16.8.0",
+    "react-ace": "^9.2.0",
     "react-dom": "^16.8.0",
     "react-hook-form": "^6.9.6",
     "react-tippy": "^1.4.0",

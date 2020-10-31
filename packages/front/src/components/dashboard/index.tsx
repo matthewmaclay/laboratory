@@ -104,7 +104,7 @@ const mock = {
   ],
 };
 
-export default function CourseList({ dataTasks, activeGroupId }) {
+export default function CourseList({ dataTasks, activeGroupId, isStudent }) {
   const [choseType, setType] = useState("Task");
 
   function handleClick(type: string) {
@@ -115,12 +115,12 @@ export default function CourseList({ dataTasks, activeGroupId }) {
       return (
         <StyledCourseList>
           <StyledHeader>
-            <EditorHeader activeGroupId={activeGroupId} fun={handleClick} />
+            <EditorHeader isStudent={isStudent} activeGroupId={activeGroupId} fun={handleClick} />
           </StyledHeader>
           <StyledCars>
             <Flex flexDirection="row" flexWrap="wrap">
-              В группе еще не добавлено заданий. <br />
-			  Создайте первое!
+				{isStudent?"На вас еще не было назначено ни одной задачи":"В группе еще не добавлено заданий. <br />Создайте первое!"}
+              
             </Flex>
           </StyledCars>
         </StyledCourseList>
@@ -134,7 +134,7 @@ export default function CourseList({ dataTasks, activeGroupId }) {
           <Flex flexDirection="row" flexWrap="wrap">
             {dataTasks ? (
               dataTasks.tasks.map((i, index) => (
-                <Link href={`/teacher/tasks/${i.id}`}>
+                <Link href={isStudent?`/student/tasks/${i.id}`:`/teacher/tasks/${i.id}`}>
                   <Box
                     width="200px"
                     height="196px"
