@@ -1,2 +1,2 @@
-FROM node:14-alpine
+FROM python:3-alpine
 ENTRYPOINT ["python3", "-c"]
