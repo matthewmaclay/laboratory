@@ -2529,6 +2529,19 @@ export type CreateGroupMutation = (
   )> }
 );
 
+export type GetTasksByGroupIdQueryVariables = Exact<{
+  groupId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type GetTasksByGroupIdQuery = (
+  { __typename?: 'Query' }
+  & { tasks?: Maybe<Array<Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id'>
+  )>>> }
+);
+
 
 export const GetLessonsDocument = gql`
     query getLessons($status: ENUM_LESSON_STATUS) {
@@ -3136,3 +3149,36 @@ export function useCreateGroupMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateGroupMutationHookResult = ReturnType<typeof useCreateGroupMutation>;
 export type CreateGroupMutationResult = Apollo.MutationResult<CreateGroupMutation>;
 export type CreateGroupMutationOptions = Apollo.BaseMutationOptions<CreateGroupMutation, CreateGroupMutationVariables>;
+export const GetTasksByGroupIdDocument = gql`
+    query getTasksByGroupId($groupId: ID) {
+  tasks(where: {group: $groupId}) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetTasksByGroupIdQuery__
+ *
+ * To run a query within a React component, call `useGetTasksByGroupIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTasksByGroupIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTasksByGroupIdQuery({
+ *   variables: {
+ *      groupId: // value for 'groupId'
+ *   },
+ * });
+ */
+export function useGetTasksByGroupIdQuery(baseOptions?: Apollo.QueryHookOptions<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>) {
+        return Apollo.useQuery<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>(GetTasksByGroupIdDocument, baseOptions);
+      }
+export function useGetTasksByGroupIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>) {
+          return Apollo.useLazyQuery<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>(GetTasksByGroupIdDocument, baseOptions);
+        }
+export type GetTasksByGroupIdQueryHookResult = ReturnType<typeof useGetTasksByGroupIdQuery>;
+export type GetTasksByGroupIdLazyQueryHookResult = ReturnType<typeof useGetTasksByGroupIdLazyQuery>;
+export type GetTasksByGroupIdQueryResult = Apollo.QueryResult<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>;

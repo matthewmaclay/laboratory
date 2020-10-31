@@ -14,13 +14,13 @@ const StyledCourseList = style.div`
 `
 
 const StyledHeader = style.div`
-	width: 80%;
+	width: 90%;
 	margin-top: 47px;
 `
 
 const StyledCars = style.div`
 	margin-top: 64px;
-	width: 80%;
+	width: 90%;
 	cursor: pointer;
 
 	.Card {
@@ -119,7 +119,7 @@ export default function CourseList() {
 					<Flex flexDirection="row" flexWrap="wrap">
 						{mock.lessons.map((i) => (
 							<Link href={`/author/lesson/${i.id}/description`}>
-								<Box width="240px" 
+								<Box width="200px" 
 									height="196px" 
 									margin="23px" 
 									background="#617083"
@@ -151,7 +151,7 @@ export default function CourseList() {
 				</StyledHeader>
 				<StyledSeparator />
 				<StyledTable>
-					<Table width="80%" color="#E0E4EA" isHoverable>
+					<Table width="90%" color="#E0E4EA" isHoverable>
 						<Table.Head background="#171C26">
 							<Table.Row>
 								<Table.HeadCell color="#E0E4EA">Имя ученика</Table.HeadCell>
