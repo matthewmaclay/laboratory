@@ -111,7 +111,7 @@ export default function CourseList({ dataTasks, activeGroupId }) {
     setType(type);
   }
   if (choseType == "Task") {
-    if (!dataTasks.tasks.length)
+    if (!dataTasks?.tasks.length)
       return (
         <StyledCourseList>
           <StyledHeader>

@@ -1,6 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, Card, Button, Box, Link, Heading, InputField, Divider } from "bumbag";
-
+import {
+  Modal,
+  Card,
+  Button,
+  Box,
+  Link,
+  Heading,
+  InputField,
+  Divider,
+} from "bumbag";
+import LinkNext from "next/link";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Icon } from "bumbag";
 import WithSideBar from "components/layout/WithSideBar";
 import {
   useCreateEmptyExerciseMutation,
@@ -20,7 +31,7 @@ import Editor from "components/Editor";
 import TableTest from "components/table/TableTest";
 
 const TextWrapper = styled.div`
-  & .bb-TextBlock{
+  & .bb-TextBlock {
     opacity: 0.5;
   }
 `;
@@ -60,6 +71,19 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </Link>
       }
       blocks={[
+        <Flex flexDirection="column">
+          <LinkNext href="/">
+            <Icon cursor="pointer"
+              opacity="0.5"
+              aria-label="Settings"
+              icon={faArrowLeft}
+              type="font-awesome"
+            />
+          </LinkNext>
+          <Button marginTop="15px" palette="primary" size="small">
+            Отправить задание
+          </Button>
+        </Flex>,
         <div>
           <Link>Результаты</Link>
         </div>,
@@ -84,16 +108,33 @@ const IndexTeacherPage: React.FC = ({ children }) => {
           )}
         </div>,
       ]}
-      rightBlock={<Flex paddingLeft="5px" overflowX="scroll"><TableTest></TableTest></Flex>}
+      rightBlock={
+        <Flex paddingLeft="5px" overflowX="scroll">
+          <TableTest></TableTest>
+        </Flex>
+      }
     >
       {dataExercises && (
         <Flex flexDirection="column">
           <Editor onChange={console.log} initialContent=""></Editor>
-          <Divider marginBottom="48px"/>
+          <Divider marginBottom="48px" />
           <TextWrapper>
-          <InputField marginBottom="30px" description="Необходим для расчета рейтинга и производительности ученика" label="Баллы за номер" type="number" width="80%" placeholder="Баллы за задачу"></InputField>
+            <InputField
+              marginBottom="30px"
+              description="Необходим для расчета рейтинга и производительности ученика"
+              label="Баллы за номер"
+              type="number"
+              width="80%"
+              placeholder="Баллы за задачу"
+            ></InputField>
 
-          <InputField description="Учитывается при расчете рейтинга" label="Таймер (в минутах)" type="number" width="80%" placeholder="Таймер"></InputField>
+            <InputField
+              description="Учитывается при расчете рейтинга"
+              label="Таймер (в минутах)"
+              type="number"
+              width="80%"
+              placeholder="Таймер"
+            ></InputField>
           </TextWrapper>
         </Flex>
       )}
