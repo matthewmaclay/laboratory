@@ -10,7 +10,7 @@ services:
   front:
     build:
       context: ./packages/front
-      dockerfile: packages/front/Dockerfile
+      dockerfile: ./packages/front/Dockerfile
     volumes:
       - ./packages/front/src:/app/src
       - ./packages/front/pages:/app/pages
@@ -22,7 +22,7 @@ services:
   #     - "127.0.0.1:3001:3000"
   pythonapi:
     build:
-      dockerfile: packages/python-api/Dockerfile
+      dockerfile: ./packages/python-api/Dockerfile
       context: ./packages/python-api
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
