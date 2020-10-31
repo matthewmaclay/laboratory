@@ -10,7 +10,7 @@ services:
   front:
     build:
       context: ./packages/front
-      dockerfile: ./packages/front/Dockerfile
+      dockerfile: ./packages/front/prod.docker
     volumes:
       - ./packages/front/src:/app/src
       - ./packages/front/pages:/app/pages
