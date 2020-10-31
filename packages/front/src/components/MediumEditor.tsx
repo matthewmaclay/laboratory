@@ -23,6 +23,7 @@ const OurMediumEditor: React.FC<EditorProps> = ({
   onChange,
   initialContent,
 }) => {
+  
   const refEditor = useRef();
   useEffect(() => {
     refEditor.current = new MediumEditor(".editor", {

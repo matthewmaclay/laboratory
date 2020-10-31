@@ -33,6 +33,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { data: dataStudents } = useGetStudentsQuery();
   const { data: dataTasks } = useGetTasksByGroupIdQuery({
     variables: { groupId: activeGroup.id },
+    fetchPolicy:"network-only"
   });
   const {
     data,
