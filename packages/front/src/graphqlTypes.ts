@@ -2542,6 +2542,72 @@ export type GetTasksByGroupIdQuery = (
   )>>> }
 );
 
+export type CreateEmptyExerciseMutationVariables = Exact<{
+  taskId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type CreateEmptyExerciseMutation = (
+  { __typename?: 'Mutation' }
+  & { createExercise?: Maybe<(
+    { __typename?: 'createExercisePayload' }
+    & { exercise?: Maybe<(
+      { __typename?: 'Exercise' }
+      & Pick<Exercise, 'id'>
+    )> }
+  )> }
+);
+
+export type CreateEmptyTaskMutationVariables = Exact<{
+  groupId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type CreateEmptyTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { createTask?: Maybe<(
+    { __typename?: 'createTaskPayload' }
+    & { task?: Maybe<(
+      { __typename?: 'Task' }
+      & Pick<Task, 'id'>
+    )> }
+  )> }
+);
+
+export type GetExercisesByTaskIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetExercisesByTaskIdQuery = (
+  { __typename?: 'Query' }
+  & { exercises?: Maybe<Array<Maybe<(
+    { __typename?: 'Exercise' }
+    & Pick<Exercise, 'id'>
+  )>>> }
+);
+
+export type GetExerciseByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetExerciseByIdQuery = (
+  { __typename?: 'Query' }
+  & { exercise?: Maybe<(
+    { __typename?: 'Exercise' }
+    & Pick<Exercise, 'id'>
+    & { tests?: Maybe<Array<Maybe<(
+      { __typename?: 'ComponentNewTest' }
+      & Pick<ComponentNewTest, 'result'>
+      & { args?: Maybe<Array<Maybe<(
+        { __typename?: 'ComponentNewArg' }
+        & Pick<ComponentNewArg, 'value'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
 
 export const GetLessonsDocument = gql`
     query getLessons($status: ENUM_LESSON_STATUS) {
@@ -3182,3 +3248,143 @@ export function useGetTasksByGroupIdLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetTasksByGroupIdQueryHookResult = ReturnType<typeof useGetTasksByGroupIdQuery>;
 export type GetTasksByGroupIdLazyQueryHookResult = ReturnType<typeof useGetTasksByGroupIdLazyQuery>;
 export type GetTasksByGroupIdQueryResult = Apollo.QueryResult<GetTasksByGroupIdQuery, GetTasksByGroupIdQueryVariables>;
+export const CreateEmptyExerciseDocument = gql`
+    mutation createEmptyExercise($taskId: ID) {
+  createExercise(input: {data: {task: $taskId}}) {
+    exercise {
+      id
+    }
+  }
+}
+    `;
+export type CreateEmptyExerciseMutationFn = Apollo.MutationFunction<CreateEmptyExerciseMutation, CreateEmptyExerciseMutationVariables>;
+
+/**
+ * __useCreateEmptyExerciseMutation__
+ *
+ * To run a mutation, you first call `useCreateEmptyExerciseMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEmptyExerciseMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEmptyExerciseMutation, { data, loading, error }] = useCreateEmptyExerciseMutation({
+ *   variables: {
+ *      taskId: // value for 'taskId'
+ *   },
+ * });
+ */
+export function useCreateEmptyExerciseMutation(baseOptions?: Apollo.MutationHookOptions<CreateEmptyExerciseMutation, CreateEmptyExerciseMutationVariables>) {
+        return Apollo.useMutation<CreateEmptyExerciseMutation, CreateEmptyExerciseMutationVariables>(CreateEmptyExerciseDocument, baseOptions);
+      }
+export type CreateEmptyExerciseMutationHookResult = ReturnType<typeof useCreateEmptyExerciseMutation>;
+export type CreateEmptyExerciseMutationResult = Apollo.MutationResult<CreateEmptyExerciseMutation>;
+export type CreateEmptyExerciseMutationOptions = Apollo.BaseMutationOptions<CreateEmptyExerciseMutation, CreateEmptyExerciseMutationVariables>;
+export const CreateEmptyTaskDocument = gql`
+    mutation createEmptyTask($groupId: ID) {
+  createTask(input: {data: {group: $groupId}}) {
+    task {
+      id
+    }
+  }
+}
+    `;
+export type CreateEmptyTaskMutationFn = Apollo.MutationFunction<CreateEmptyTaskMutation, CreateEmptyTaskMutationVariables>;
+
+/**
+ * __useCreateEmptyTaskMutation__
+ *
+ * To run a mutation, you first call `useCreateEmptyTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEmptyTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEmptyTaskMutation, { data, loading, error }] = useCreateEmptyTaskMutation({
+ *   variables: {
+ *      groupId: // value for 'groupId'
+ *   },
+ * });
+ */
+export function useCreateEmptyTaskMutation(baseOptions?: Apollo.MutationHookOptions<CreateEmptyTaskMutation, CreateEmptyTaskMutationVariables>) {
+        return Apollo.useMutation<CreateEmptyTaskMutation, CreateEmptyTaskMutationVariables>(CreateEmptyTaskDocument, baseOptions);
+      }
+export type CreateEmptyTaskMutationHookResult = ReturnType<typeof useCreateEmptyTaskMutation>;
+export type CreateEmptyTaskMutationResult = Apollo.MutationResult<CreateEmptyTaskMutation>;
+export type CreateEmptyTaskMutationOptions = Apollo.BaseMutationOptions<CreateEmptyTaskMutation, CreateEmptyTaskMutationVariables>;
+export const GetExercisesByTaskIdDocument = gql`
+    query getExercisesByTaskId($id: ID!) {
+  exercises(where: {task: $id}) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetExercisesByTaskIdQuery__
+ *
+ * To run a query within a React component, call `useGetExercisesByTaskIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetExercisesByTaskIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetExercisesByTaskIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetExercisesByTaskIdQuery(baseOptions?: Apollo.QueryHookOptions<GetExercisesByTaskIdQuery, GetExercisesByTaskIdQueryVariables>) {
+        return Apollo.useQuery<GetExercisesByTaskIdQuery, GetExercisesByTaskIdQueryVariables>(GetExercisesByTaskIdDocument, baseOptions);
+      }
+export function useGetExercisesByTaskIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetExercisesByTaskIdQuery, GetExercisesByTaskIdQueryVariables>) {
+          return Apollo.useLazyQuery<GetExercisesByTaskIdQuery, GetExercisesByTaskIdQueryVariables>(GetExercisesByTaskIdDocument, baseOptions);
+        }
+export type GetExercisesByTaskIdQueryHookResult = ReturnType<typeof useGetExercisesByTaskIdQuery>;
+export type GetExercisesByTaskIdLazyQueryHookResult = ReturnType<typeof useGetExercisesByTaskIdLazyQuery>;
+export type GetExercisesByTaskIdQueryResult = Apollo.QueryResult<GetExercisesByTaskIdQuery, GetExercisesByTaskIdQueryVariables>;
+export const GetExerciseByIdDocument = gql`
+    query getExerciseById($id: ID!) {
+  exercise(id: $id) {
+    id
+    tests {
+      args {
+        value
+      }
+      result
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetExerciseByIdQuery__
+ *
+ * To run a query within a React component, call `useGetExerciseByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetExerciseByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetExerciseByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetExerciseByIdQuery(baseOptions?: Apollo.QueryHookOptions<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>) {
+        return Apollo.useQuery<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>(GetExerciseByIdDocument, baseOptions);
+      }
+export function useGetExerciseByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>) {
+          return Apollo.useLazyQuery<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>(GetExerciseByIdDocument, baseOptions);
+        }
+export type GetExerciseByIdQueryHookResult = ReturnType<typeof useGetExerciseByIdQuery>;
+export type GetExerciseByIdLazyQueryHookResult = ReturnType<typeof useGetExerciseByIdLazyQuery>;
+export type GetExerciseByIdQueryResult = Apollo.QueryResult<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>;

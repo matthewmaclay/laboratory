@@ -52,6 +52,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   useEffect(() => {
     data && setActiveGroup(data.groups[0]);
   }, [data]);
+  console.log(dataTasks, activeGroup)
   return (
     <WithSideBar
       header={<>{activeGroup?.title || "Выберите группу"}</>}
@@ -139,7 +140,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList dataTasks={dataTasks}/>
+        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks}/>
       </Box>
     </WithSideBar>
   );
