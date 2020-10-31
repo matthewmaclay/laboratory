@@ -199,9 +199,19 @@ query getGroupsWhereIamTeacher($id: ID!) {
 }
 
 mutation createGroup($students: [ID], $title: String, $teacherId: String) {
-  createGroup(input: { data: { students: $students, title: $title, teacherId: $teacherId } }) {
+  createGroup(
+    input: {
+      data: { students: $students, title: $title, teacherId: $teacherId }
+    }
+  ) {
     group {
       id
     }
+  }
+}
+
+query getTasksByGroupId($groupId: ID) {
+  tasks(where: { group: $groupId }) {
+    id
   }
 }
