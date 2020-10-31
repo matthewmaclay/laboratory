@@ -16,7 +16,15 @@ services:
       - ./packages/front/pages:/app/pages
     ports:
       - "127.0.0.1:3000:3000"
-  api:
-    build: ./packages/apiValidator
+  # api:
+  #   build: ./packages/apiValidator
+  #   ports:
+  #     - "127.0.0.1:3001:3000"
+  pythonapi:
+    build:
+      dockerfile: packages/python-api/Dockerfile
+      context: ./packages/python-api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "127.0.0.1:3001:3000"
+      - "127.0.0.1:8000:8000"
