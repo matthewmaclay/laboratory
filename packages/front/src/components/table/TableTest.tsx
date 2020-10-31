@@ -50,7 +50,7 @@ const GenerateTable = ( props?: any ) => {
 	function generateState (mock) {
 		const result = {};
 		const Head = [];
-		mock[0].args.forEach(item => {
+		mock[0]?.args.forEach(item => {
 			Head.push(item.title)
 		});
 		result['Head'] = Head;
