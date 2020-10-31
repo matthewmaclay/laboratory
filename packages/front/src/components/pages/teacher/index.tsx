@@ -20,13 +20,13 @@ const SelectWrapper = styled.div`
 `;
 
 const IndexTeacherPage: React.FC = ({ children }) => {
-    const IAM = useContext(UserContext)
+  const IAM = useContext(UserContext);
   const [activeGroup, setActiveGroup] = useState<{
     id?: string;
     title?: string;
   }>({});
   const [students, setStudents] = React.useState();
-  const [titleNewGroup, setTitleNewGroup] = React.useState('');
+  const [titleNewGroup, setTitleNewGroup] = React.useState("");
   const { teacher, avatar, firstName, id } = useContext(UserContext);
   const { data: dataStudents } = useGetStudentsQuery();
 
@@ -40,8 +40,8 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   });
   const [createGroup] = useCreateGroupMutation({
     onCompleted: () => {
-        debugger
-        refetchGroups()
+      debugger;
+      refetchGroups();
     },
   });
   useEffect(() => {
@@ -64,7 +64,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
                 marginBottom="20px"
                 size="medium"
                 type="text"
-                onChange={({target})=>setTitleNewGroup(target.value)}
+                onChange={({ target }) => setTitleNewGroup(target.value)}
                 value={titleNewGroup}
               ></InputField>
 
@@ -84,11 +84,19 @@ const IndexTeacherPage: React.FC = ({ children }) => {
               </SelectWrapper>
 
               <Modal.Disclosure use={Box}>
-                <Button onClick={()=>createGroup({variables:{
-                    title: titleNewGroup,
-                    teacher: IAM.id,
-                    students: students?.map(i=>i.value) || []
-                }})} palette="primary" size="medium">
+                <Button
+                  onClick={() =>
+                    createGroup({
+                      variables: {
+                        title: titleNewGroup,
+                        teacher: IAM.id,
+                        students: students?.map((i) => i.value) || [],
+                      },
+                    })
+                  }
+                  palette="primary"
+                  size="medium"
+                >
                   Создать группу
                 </Button>
               </Modal.Disclosure>
@@ -106,15 +114,16 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             <Spinner size="large" />
           ) : (
             <Flex marginTop="40px" flexDirection="column">
-              {data.groups.map((i) => (
-                <Link
-                  onClick={() => setActiveGroup({ id: i.id, title: i.title })}
-                  marginBottom="24px"
-                  color={activeGroup.id == i.id ? "white" : "#8883F1"}
-                >
-                  {i.title}
-                </Link>
-              ))}
+              {data.groups.length &&
+                data.groups.map((i) => (
+                  <Link
+                    onClick={() => setActiveGroup({ id: i.id, title: i.title })}
+                    marginBottom="24px"
+                    color={activeGroup.id == i.id ? "white" : "#8883F1"}
+                  >
+                    {i.title}
+                  </Link>
+                ))}
             </Flex>
           )}
         </div>,
