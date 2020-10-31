@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "name": "comment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "topOffset": {
+      "type": "integer"
+    },
+    "messages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "new.message"
+    },
+    "content": {
+      "type": "text"
+    },
+    "lesson": {
+      "via": "comments",
+      "model": "lesson"
+    }
+  }
+}

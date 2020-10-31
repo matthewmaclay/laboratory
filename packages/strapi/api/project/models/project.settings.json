@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "name": "project"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "metrics": {
+      "type": "component",
+      "repeatable": true,
+      "component": "new.metrics"
+    },
+    "name": {
+      "type": "string"
+    },
+    "stages": {
+      "collection": "stage",
+      "via": "project"
+    }
+  }
+}

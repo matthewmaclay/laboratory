@@ -1,0 +1,183 @@
+query getLessons($status: ENUM_LESSON_STATUS) {
+  lessons(where: { status: $status }) {
+    status
+    id
+    title
+    time
+  }
+}
+
+query getLesson($id: ID!) {
+  lesson(id: $id) {
+    status
+    content
+    title
+    # comments {
+    #   content
+    #   topOffset
+    #   content
+    #   leftOffset
+    # }
+  }
+}
+
+mutation updateLessonContent($id: ID!, $content: String) {
+  updateLesson(input: { where: { id: $id }, data: { content: $content } }) {
+    lesson {
+      id
+    }
+  }
+}
+
+mutation updateLessonStatus($id: ID!, $status: ENUM_LESSON_STATUS) {
+  updateLesson(input: { where: { id: $id }, data: { status: $status } }) {
+    lesson {
+      id
+    }
+  }
+}
+
+mutation createLesson($title: String) {
+  createLesson(input: { data: { title: $title } }) {
+    lesson {
+      id
+    }
+  }
+}
+
+# mutation createComment(
+#   $content: String
+#   $topOffset: Int
+#   $leftOffset: Int
+#   $lesson: ID!
+# ) {
+#   createComment(
+#     input: {
+#       data: {
+#         content: $content
+#         topOffset: $topOffset
+#         leftOffset: $leftOffset
+#         lesson: $lesson
+#       }
+#     }
+#   ) {
+#     comment {
+#       id
+#     }
+#   }
+# }
+
+query me {
+  me {
+    id
+    username
+    email
+    confirmed
+
+  }
+}
+
+query rolesAndMe {
+  roles {
+    id
+    name
+  }
+  me {
+    id
+    username
+    email
+    confirmed
+  }
+}
+
+query rolesAndMe {
+  roles {
+    id
+    name
+  }
+  me {
+    id
+    username
+    email
+    confirmed
+  }
+}
+
+query users {
+  users {
+    id
+    email
+  }
+}
+
+query getUser($id:ID!){
+  user(id:$id){
+    patronymic
+    lastName
+    firstName
+    birthday
+    organization
+    avatar
+  }
+}
+
+mutation makeMeTeacher($id: ID!) {
+  updateUser(input: { where: { id: $id }, data: { teacher: true } }) {
+    user {
+      id
+    }
+  }
+}
+
+mutation makeMeStudent($id: ID!) {
+  updateUser(input: { where: { id: $id }, data: { teacher: false } }) {
+    user {
+      id
+    }
+  }
+}
+
+mutation register($username: String!, $email: String!, $password: String!) {
+  register(input: { username: $username, email: $email, password: $password }) {
+    jwt
+  }
+}
+
+mutation login($password: String!, $identifier: String!) {
+  login(input: { password: $password, identifier: $identifier }) {
+    jwt
+    user {
+      id
+    }
+  }
+}
+
+mutation updateUser(
+  $id: ID!
+  $firstName: String
+  $lastName: String
+  $patronymic: String
+  $organization: String
+  $birthday: String
+  $avatar: String
+  $teacher: Boolean
+) {
+  updateUser(
+    input: {
+      where: { id: $id }
+      data: {
+        firstName: $firstName
+        lastName: $lastName
+        patronymic: $patronymic
+        organization: $organization
+        birthday: $birthday
+        avatar: $avatar
+        teacher: $teacher
+      }
+    }
+  ) {
+    user {
+      id
+    }
+  }
+}

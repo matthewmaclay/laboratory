@@ -1,0 +1,22 @@
+version: "3"
+services:
+  strapi:
+    image: strapi/strapi
+    volumes:
+      - ./packages/strapi:/srv/app
+      - ./packages/strapi/node_modules:/srv/app/node_modules
+    ports:
+      - "127.0.0.1:1337:1337"
+  front:
+    build:
+      context: ./packages/front
+      dockerfile: packages/front/Dockerfile.prod
+    volumes:
+      - ./packages/front/src:/app/src
+      - ./packages/front/pages:/app/pages
+    ports:
+      - "127.0.0.1:3000:3000"
+  api:
+    build: ./packages/apiValidator
+    ports:
+      - "127.0.0.1:3001:3000"

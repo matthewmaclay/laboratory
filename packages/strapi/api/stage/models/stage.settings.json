@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stages",
+  "info": {
+    "name": "stage"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "number": {
+      "type": "string",
+      "unique": false
+    },
+    "project": {
+      "via": "stages",
+      "model": "project"
+    }
+  }
+}

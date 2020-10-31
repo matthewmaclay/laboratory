@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_new_metrics",
+  "info": {
+    "name": "metrics",
+    "icon": "asterisk"
+  },
+  "options": {},
+  "attributes": {
+    "data": {
+      "type": "json"
+    }
+  }
+}

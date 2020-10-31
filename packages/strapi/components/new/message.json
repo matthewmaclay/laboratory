@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_new_messages",
+  "info": {
+    "name": "message",
+    "icon": "comment-alt"
+  },
+  "options": {},
+  "attributes": {
+    "author": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    }
+  }
+}

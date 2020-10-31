@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lessons",
+  "info": {
+    "name": "lesson"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "comments": {
+      "collection": "comment",
+      "via": "lesson"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "fix",
+        "check",
+        "complete"
+      ],
+      "default": "draft"
+    },
+    "time": {
+      "type": "string"
+    },
+    "uniq": {
+      "type": "json"
+    }
+  }
+}
