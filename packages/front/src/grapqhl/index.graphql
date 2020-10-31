@@ -192,14 +192,14 @@ mutation updateUser(
 }
 
 query getGroupsWhereIamTeacher($id: ID!) {
-  groups(where: { teacher: $id }) {
+  groups(where: { teacherId: $id }) {
     title
     id
   }
 }
 
-mutation createGroup($students: [ID], $title: String, $teacher: ID) {
-  createGroup(input: { data: { students: $students, title: $title, teacher: $teacher } }) {
+mutation createGroup($students: [ID], $title: String, $teacherId: String) {
+  createGroup(input: { data: { students: $students, title: $title, teacherId: $teacherId } }) {
     group {
       id
     }

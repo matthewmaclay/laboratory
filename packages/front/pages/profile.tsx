@@ -150,7 +150,7 @@ const ChooseRole = () => {
           { label: "Светлая", value: "default" },
         ]}
       />
-      <Button disabled={!!role} width="100%" onClick={onSubmit}>
+      <Button disabled={!role} width="100%" onClick={onSubmit}>
         Сохранить
       </Button>
     </SignLayout>

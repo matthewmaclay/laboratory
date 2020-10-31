@@ -77,10 +77,6 @@
     "groups": {
       "via": "students",
       "collection": "group"
-    },
-    "groupsWhereIamTeachers": {
-      "via": "teacher",
-      "collection": "group"
     }
   }
 }
