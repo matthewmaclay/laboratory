@@ -43,11 +43,11 @@ docker service update hack_front --image front:latest --force
 ***
 Приложение доступно по следующим адресам:
 
-`https://hack.dokub.xyz` - временный домен для фронта
+[https://hack.dokub.xyz](https://hack.dokub.xyz) - временный домен для фронта
 
-`https://admin.hack.dokub.xyz` - временный домен для админки strapi
+[https://admin.hack.dokub.xyz](https://admin.hack.dokub.xyz) - временный домен для админки strapi
 
-`https://hack.dokub.xyz/api/check` - временный роут для запуска кода ученика
+[https://hack.dokub.xyz/api/check](https://hack.dokub.xyz/api/check) - временный роут для запуска кода ученика. Принимает **POST** с **Json Data** которая указана ниже
 
 
 ***
@@ -58,4 +58,25 @@ docker service update hack_front --image front:latest --force
     "language": "python",
     "script": "def runTest(a,b):\n  return a+b"
 }
+```
+---
+**Пример запроса с правильным решением:**
+```bash
+~$ curl -X POST "https://hack.dokub.xyz/api/check" -d '{"id":1, "language": "python", "script": "def runTest(a,b):\n  return a+b"}'
+
+{"result":"True","goodAnswer":["happyp"],"yourAnswer":["happyp"]}
+```
+
+**Пример запроса с неправильным решением:**
+```bash
+~$ curl -X POST "https://hack.dokub.xyz/api/check" -d '{"id":1, "language": "python", "script": "def runTest(a,b):\n  return a+b+a"}'
+
+{"result":"False","goodAnswer":["happyp"],"yourAnswer":["happyphappy"]}
+```
+
+**Пример запроса с ошибкой в синтаксисе:**
+```bash
+curl -X POST "https://hack.dokub.xyz/api/check" -d '{"id":1, "language": "python", "script": "def runTest(a,b):\n  return a+b+с"}'
+
+{"error":"Traceback (most recent call last):\n  File \"<string>\", line 3, in <module>\n  File \"<string>\", line 2, in runTest\nNameError: name 'с' is not defined\n"}
 ```
