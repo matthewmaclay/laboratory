@@ -6,8 +6,8 @@ from pydantic import BaseModel
 import requests
 import json
 
-client = docker.from_env()
-#client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+#client = docker.from_env()
+client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 client.images.build(
     path="./", dockerfile=".docker/javascript.docker", tag="platform:javascript")
 client.images.build(
