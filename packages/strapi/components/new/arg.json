@@ -8,6 +8,9 @@
   "attributes": {
     "value": {
       "type": "string"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

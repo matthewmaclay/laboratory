@@ -20,7 +20,8 @@ module.exports = (phase) => {
 
   const env = {
     STRAPI_URL: (() => {
-      if (isDev) return "https://admin.hack.dokub.xyz";
+      if (isDev) return "http://localhost:1337";
+      // if (isDev) return "https://admin.hack.dokub.xyz";
       if (isProd) {
         return "https://admin.hack.dokub.xyz";
       }

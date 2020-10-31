@@ -31,6 +31,9 @@ const GlobalStyle = createGlobalStyle`
 		background-color: #924FD1;
 		cursor: pointer;
 	}
+  .medium-editor-toolbar{
+    z-index: 12312312312;
+  }
 `;
 
 const theme = {

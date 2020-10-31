@@ -215,3 +215,37 @@ query getTasksByGroupId($groupId: ID) {
     id
   }
 }
+
+mutation createEmptyExercise($taskId: ID) {
+  createExercise(input: { data: { task: $taskId } }) {
+    exercise {
+      id
+    }
+  }
+}
+
+mutation createEmptyTask($groupId: ID) {
+  createTask(input: { data: { group: $groupId } }) {
+    task{
+      id
+    }
+  }
+}
+
+query getExercisesByTaskId($id: ID!) {
+  exercises(where: { task: $id }) {
+    id
+  }
+}
+
+query getExerciseById($id: ID!) {
+  exercise(id: $id) {
+    id
+    tests {
+      args {
+        value
+      }
+      result
+    }
+  }
+}
