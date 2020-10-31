@@ -481,7 +481,7 @@ export type Group = {
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
   title?: Maybe<Scalars['String']>;
-  teacher?: Maybe<UsersPermissionsUser>;
+  teacherId?: Maybe<Scalars['String']>;
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
   students?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
@@ -525,19 +525,10 @@ export type UsersPermissionsUser = {
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
   groups?: Maybe<Array<Maybe<Group>>>;
-  groupsWhereIamTeachers?: Maybe<Array<Maybe<Group>>>;
 };
 
 
 export type UsersPermissionsUserGroupsArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type UsersPermissionsUserGroupsWhereIamTeachersArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
@@ -664,7 +655,7 @@ export type GroupGroupBy = {
   created_at?: Maybe<Array<Maybe<GroupConnectionCreated_At>>>;
   updated_at?: Maybe<Array<Maybe<GroupConnectionUpdated_At>>>;
   title?: Maybe<Array<Maybe<GroupConnectionTitle>>>;
-  teacher?: Maybe<Array<Maybe<GroupConnectionTeacher>>>;
+  teacherId?: Maybe<Array<Maybe<GroupConnectionTeacherId>>>;
   created_by?: Maybe<Array<Maybe<GroupConnectionCreated_By>>>;
   updated_by?: Maybe<Array<Maybe<GroupConnectionUpdated_By>>>;
 };
@@ -693,9 +684,9 @@ export type GroupConnectionTitle = {
   connection?: Maybe<GroupConnection>;
 };
 
-export type GroupConnectionTeacher = {
-  __typename?: 'GroupConnectionTeacher';
-  key?: Maybe<Scalars['ID']>;
+export type GroupConnectionTeacherId = {
+  __typename?: 'GroupConnectionTeacherId';
+  key?: Maybe<Scalars['String']>;
   connection?: Maybe<GroupConnection>;
 };
 
@@ -1057,7 +1048,7 @@ export type UploadFileRelatedArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Argument | UpdateArgumentPayload | DeleteArgumentPayload | Comment | CommentConnection | CommentAggregator | CommentAggregatorSum | CommentAggregatorAvg | CommentAggregatorMin | CommentAggregatorMax | CommentGroupBy | CommentConnectionId | CommentConnectionCreated_At | CommentConnectionUpdated_At | CommentConnectionTopOffset | CommentConnectionContent | CommentConnectionLesson | CommentConnectionCreated_By | CommentConnectionUpdated_By | CreateCommentPayload | UpdateCommentPayload | DeleteCommentPayload | Exercise | ExerciseConnection | ExerciseAggregator | ExerciseGroupBy | ExerciseConnectionId | ExerciseConnectionCreated_At | ExerciseConnectionUpdated_At | ExerciseConnectionDescription | ExerciseConnectionTask | ExerciseConnectionCreated_By | ExerciseConnectionUpdated_By | CreateExercisePayload | UpdateExercisePayload | DeleteExercisePayload | Group | GroupConnection | GroupAggregator | GroupGroupBy | GroupConnectionId | GroupConnectionCreated_At | GroupConnectionUpdated_At | GroupConnectionTitle | GroupConnectionTeacher | GroupConnectionCreated_By | GroupConnectionUpdated_By | CreateGroupPayload | UpdateGroupPayload | DeleteGroupPayload | Lesson | LessonConnection | LessonAggregator | LessonGroupBy | LessonConnectionId | LessonConnectionCreated_At | LessonConnectionUpdated_At | LessonConnectionTitle | LessonConnectionContent | LessonConnectionStatus | LessonConnectionTime | LessonConnectionUniq | LessonConnectionCreated_By | LessonConnectionUpdated_By | CreateLessonPayload | UpdateLessonPayload | DeleteLessonPayload | Project | ProjectConnection | ProjectAggregator | ProjectGroupBy | ProjectConnectionId | ProjectConnectionCreated_At | ProjectConnectionUpdated_At | ProjectConnectionName | ProjectConnectionCreated_By | ProjectConnectionUpdated_By | CreateProjectPayload | UpdateProjectPayload | DeleteProjectPayload | Stage | StageConnection | StageAggregator | StageGroupBy | StageConnectionId | StageConnectionCreated_At | StageConnectionUpdated_At | StageConnectionNumber | StageConnectionProject | StageConnectionCreated_By | StageConnectionUpdated_By | CreateStagePayload | UpdateStagePayload | DeleteStagePayload | Task | TaskConnection | TaskAggregator | TaskGroupBy | TaskConnectionId | TaskConnectionCreated_At | TaskConnectionUpdated_At | TaskConnectionGroup | TaskConnectionCreated_By | TaskConnectionUpdated_By | CreateTaskPayload | UpdateTaskPayload | DeleteTaskPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTeacher | UsersPermissionsUserConnectionFirstName | UsersPermissionsUserConnectionLastName | UsersPermissionsUserConnectionBirthday | UsersPermissionsUserConnectionOrganization | UsersPermissionsUserConnectionPatronymic | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentNewArg | ComponentNewMessage | ComponentNewMetrics | ComponentNewTest;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Argument | UpdateArgumentPayload | DeleteArgumentPayload | Comment | CommentConnection | CommentAggregator | CommentAggregatorSum | CommentAggregatorAvg | CommentAggregatorMin | CommentAggregatorMax | CommentGroupBy | CommentConnectionId | CommentConnectionCreated_At | CommentConnectionUpdated_At | CommentConnectionTopOffset | CommentConnectionContent | CommentConnectionLesson | CommentConnectionCreated_By | CommentConnectionUpdated_By | CreateCommentPayload | UpdateCommentPayload | DeleteCommentPayload | Exercise | ExerciseConnection | ExerciseAggregator | ExerciseGroupBy | ExerciseConnectionId | ExerciseConnectionCreated_At | ExerciseConnectionUpdated_At | ExerciseConnectionDescription | ExerciseConnectionTask | ExerciseConnectionCreated_By | ExerciseConnectionUpdated_By | CreateExercisePayload | UpdateExercisePayload | DeleteExercisePayload | Group | GroupConnection | GroupAggregator | GroupGroupBy | GroupConnectionId | GroupConnectionCreated_At | GroupConnectionUpdated_At | GroupConnectionTitle | GroupConnectionTeacherId | GroupConnectionCreated_By | GroupConnectionUpdated_By | CreateGroupPayload | UpdateGroupPayload | DeleteGroupPayload | Lesson | LessonConnection | LessonAggregator | LessonGroupBy | LessonConnectionId | LessonConnectionCreated_At | LessonConnectionUpdated_At | LessonConnectionTitle | LessonConnectionContent | LessonConnectionStatus | LessonConnectionTime | LessonConnectionUniq | LessonConnectionCreated_By | LessonConnectionUpdated_By | CreateLessonPayload | UpdateLessonPayload | DeleteLessonPayload | Project | ProjectConnection | ProjectAggregator | ProjectGroupBy | ProjectConnectionId | ProjectConnectionCreated_At | ProjectConnectionUpdated_At | ProjectConnectionName | ProjectConnectionCreated_By | ProjectConnectionUpdated_By | CreateProjectPayload | UpdateProjectPayload | DeleteProjectPayload | Stage | StageConnection | StageAggregator | StageGroupBy | StageConnectionId | StageConnectionCreated_At | StageConnectionUpdated_At | StageConnectionNumber | StageConnectionProject | StageConnectionCreated_By | StageConnectionUpdated_By | CreateStagePayload | UpdateStagePayload | DeleteStagePayload | Task | TaskConnection | TaskAggregator | TaskGroupBy | TaskConnectionId | TaskConnectionCreated_At | TaskConnectionUpdated_At | TaskConnectionGroup | TaskConnectionCreated_By | TaskConnectionUpdated_By | CreateTaskPayload | UpdateTaskPayload | DeleteTaskPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionTeacher | UsersPermissionsUserConnectionFirstName | UsersPermissionsUserConnectionLastName | UsersPermissionsUserConnectionBirthday | UsersPermissionsUserConnectionOrganization | UsersPermissionsUserConnectionPatronymic | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentNewArg | ComponentNewMessage | ComponentNewMetrics | ComponentNewTest;
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
@@ -1971,8 +1962,8 @@ export type CreateGroupInput = {
 export type GroupInput = {
   title?: Maybe<Scalars['String']>;
   students?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  teacher?: Maybe<Scalars['ID']>;
   tasks?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  teacherId?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1985,8 +1976,8 @@ export type UpdateGroupInput = {
 export type EditGroupInput = {
   title?: Maybe<Scalars['String']>;
   students?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  teacher?: Maybe<Scalars['ID']>;
   tasks?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  teacherId?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -2176,7 +2167,6 @@ export type UserInput = {
   patronymic?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  groupsWhereIamTeachers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -2203,7 +2193,6 @@ export type EditUserInput = {
   patronymic?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   groups?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  groupsWhereIamTeachers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -2525,7 +2514,7 @@ export type GetGroupsWhereIamTeacherQuery = (
 export type CreateGroupMutationVariables = Exact<{
   students?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title?: Maybe<Scalars['String']>;
-  teacher?: Maybe<Scalars['ID']>;
+  teacherId?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -3079,7 +3068,7 @@ export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const GetGroupsWhereIamTeacherDocument = gql`
     query getGroupsWhereIamTeacher($id: ID!) {
-  groups(where: {teacher: $id}) {
+  groups(where: {teacherId: $id}) {
     title
     id
   }
@@ -3112,8 +3101,8 @@ export type GetGroupsWhereIamTeacherQueryHookResult = ReturnType<typeof useGetGr
 export type GetGroupsWhereIamTeacherLazyQueryHookResult = ReturnType<typeof useGetGroupsWhereIamTeacherLazyQuery>;
 export type GetGroupsWhereIamTeacherQueryResult = Apollo.QueryResult<GetGroupsWhereIamTeacherQuery, GetGroupsWhereIamTeacherQueryVariables>;
 export const CreateGroupDocument = gql`
-    mutation createGroup($students: [ID], $title: String, $teacher: ID) {
-  createGroup(input: {data: {students: $students, title: $title, teacher: $teacher}}) {
+    mutation createGroup($students: [ID], $title: String, $teacherId: String) {
+  createGroup(input: {data: {students: $students, title: $title, teacherId: $teacherId}}) {
     group {
       id
     }
@@ -3137,7 +3126,7 @@ export type CreateGroupMutationFn = Apollo.MutationFunction<CreateGroupMutation,
  *   variables: {
  *      students: // value for 'students'
  *      title: // value for 'title'
- *      teacher: // value for 'teacher'
+ *      teacherId: // value for 'teacherId'
  *   },
  * });
  */

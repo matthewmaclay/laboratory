@@ -18,14 +18,12 @@
       "via": "groups",
       "dominant": true
     },
-    "teacher": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "groupsWhereIamTeachers"
-    },
     "tasks": {
       "collection": "task",
       "via": "group"
+    },
+    "teacherId": {
+      "type": "string"
     }
   }
 }

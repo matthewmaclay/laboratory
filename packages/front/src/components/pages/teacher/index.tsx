@@ -40,7 +40,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   });
   const [createGroup] = useCreateGroupMutation({
     onCompleted: () => {
-      debugger;
+      
       refetchGroups();
     },
   });
@@ -50,7 +50,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   console.log(titleNewGroup, students);
   return (
     <WithSideBar
-      header={<>{activeGroup.title || "Выберите группу"}</>}
+      header={<>{activeGroup?.title || "Выберите группу"}</>}
       lastBlock={
         <Modal.State animated>
           <Modal.Disclosure use={Link}>+ Добавить группу</Modal.Disclosure>
@@ -89,7 +89,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
                     createGroup({
                       variables: {
                         title: titleNewGroup,
-                        teacher: IAM.id,
+                        teacherId: IAM.id,
                         students: students?.map((i) => i.value) || [],
                       },
                     })
@@ -117,9 +117,9 @@ const IndexTeacherPage: React.FC = ({ children }) => {
               {data.groups.length &&
                 data.groups.map((i) => (
                   <Link
-                    onClick={() => setActiveGroup({ id: i.id, title: i.title })}
+                    onClick={() => setActiveGroup({ id: i.id, title: i?.title || "Название не задано"  })}
                     marginBottom="24px"
-                    color={activeGroup.id == i.id ? "white" : "#8883F1"}
+                    color={activeGroup?.id == i.id ? "white" : "#8883F1"}
                   >
                     {i.title}
                   </Link>
