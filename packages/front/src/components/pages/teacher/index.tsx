@@ -48,7 +48,6 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   useEffect(() => {
     data && setActiveGroup(data.groups[0]);
   }, [data]);
-  console.log(titleNewGroup, students);
   return (
     <WithSideBar
       header={<>{activeGroup?.title || "Выберите группу"}</>}
@@ -130,7 +129,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         </div>,
       ]}
     >
-      {children}
+      asdasdas
     </WithSideBar>
   );
 };
