@@ -81,7 +81,38 @@ const GenerateTable = ( props?: any ) => {
 
 	const [currentVariables, setVariables] = useState(initialState);
 
-	console.log(currentVariables)
+	function generateToJson(state) {
+		const result = [];
+		const allTitle = []
+		allTitle.push('open');
+		state.Head.map(item => {
+			allTitle.push(item);
+		});
+		allTitle.push('result');
+		Object.keys(state).forEach((item,i) => {
+			if(i > 0) {
+				const oneSpar = {};
+				oneSpar["open"] = state[`row${i}`][0];
+				oneSpar['result'] = state[`row${i}`][state[`row${i}`].length - 1];
+
+				const asrsArray = [];
+				allTitle.forEach((element, k) => {
+					if(k > 0 && k < state[`row${i}`].length - 1) {
+						const argsObject = {};
+						argsObject['id'] = k;
+						argsObject['title'] = element;
+						argsObject['value'] = state[`row${i}`][k]
+						asrsArray.push(argsObject);
+					}
+				});
+				oneSpar['args'] = asrsArray;
+				result.push(oneSpar);
+			}
+		});
+		return { tests: result } ;
+	}
+
+	generateToJson(currentVariables)
 
     function addNewVariables() {
         const head = currentVariables.Head;
