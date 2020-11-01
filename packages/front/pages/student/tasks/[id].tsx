@@ -9,7 +9,8 @@ import {
   InputField,
   Divider,
   Text,
-  ToastManager
+  ToastManager,
+  Table
 } from "bumbag";
 import LinkNext from "next/link";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +35,7 @@ import Editor from "components/Editor";
 import TableTest from "components/table/TableTest";
 import CodeEditor from "components/NoSSRCodeEditor";
 import ButtonLink from "components/ButtonLink";
+import Drawing from '../../../src/components/table/Drawing';
 
 const TextWrapper = styled.div`
   & .bb-TextBlock {
@@ -58,7 +60,6 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       setTests(exercise.tests);
     }
   }, [activeTask.id]);
-  console.log(tests)
   const {
     data: dataExercises,
     refetch: refetchExercises,
@@ -137,6 +138,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             marginTop="-25px"
             dangerouslySetInnerHTML={{ __html: description }}
           ></Box>
+          <div>
+            <h4>Примеры проверки от учителя</h4>
+            {tests != undefined && 
+              <Drawing data={tests}/>
+            }
+            <h5>Время выполнения 20:00</h5>
+            <h5>Сложность: 3 балла</h5>
+          </div>
         </Flex>
       )}
     </WithSideBar>

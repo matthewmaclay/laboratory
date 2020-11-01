@@ -59,7 +59,7 @@ const mock = [
 
 const Test = () => {
     return(
-        <GenerateTable />
+        <GenerateTable mock={mock}/>
     )
 };
 
