@@ -19,12 +19,13 @@ const Drawing = ({ data }) => {
                 {data.map((item,i) => {
                     return(
                         <Table.Row>
-                            {item.args.map(item => {
+                            {console.log('item', item)}
+                            {item.open == true && item.args.map(item => {
                                 return(
                                     <Table.Cell>{item.value}</Table.Cell>
                                 )
                             })}
-                            <Table.Cell textAlign="right">{item.result}</Table.Cell>
+                            {item.open == true && <Table.Cell textAlign="right">{item.result}</Table.Cell>}
                         </Table.Row>
                     )
                 })}
