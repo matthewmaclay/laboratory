@@ -143,6 +143,8 @@ const IndexTeacherPage: React.FC = ({ children }) => {
             {tests != undefined && 
               <Drawing data={tests}/>
             }
+            <h5>Время выполнения 20:00</h5>
+            <h5>Сложность: 3 балла</h5>
           </div>
         </Flex>
       )}
