@@ -33,7 +33,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { teacher, avatar, firstName, id } = useContext(UserContext);
   const { data: dataStudents } = useGetStudentsQuery();
   const { data: dataTasks } = useGetTasksByGroupIdQuery({
-    variables: { groupId: activeGroup.id },
+    variables: { groupId: activeGroup.id || "noid" },
     fetchPolicy: "network-only",
   });
   const {
@@ -51,17 +51,15 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       setStudents(null);
     },
   });
- // юзеры тут
-  const {
-    data: dataUsers,
-  } = useGetUsersByGroupIdQuery({
+  // юзеры тут
+  const { data: dataUsers } = useGetUsersByGroupIdQuery({
     variables: {
-      id: activeGroup.id,
+      id: activeGroup.id || "notID",
     },
   });
-  console.log(dataUsers,'datausers')
+  console.log(dataUsers, "datausers");
   useEffect(() => {
-    data && setActiveGroup(data.groups[0]);
+    data && setActiveGroup(data.groups[0] || {});
   }, [data]);
   console.log(dataTasks, activeGroup);
   return (
@@ -151,7 +149,11 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList activeGroupId={activeGroup.id} dataTasks={dataTasks} dataUsers={dataUsers} />
+        <CourseList
+          activeGroupId={activeGroup.id}
+          dataTasks={dataTasks}
+          dataUsers={dataUsers}
+        />
       </Box>
     </WithSideBar>
   );

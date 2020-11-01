@@ -165,7 +165,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
               description="Необходим для расчета рейтинга и производительности ученика"
               label="Баллы за номер"
               type="number"
-              width="80%"
+              width="100%"
               placeholder="Баллы за задачу"
               value={point}
               onChange={({ target }) => setPoint(target.value)}
@@ -175,7 +175,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
               description="Учитывается при расчете рейтинга"
               label="Таймер (в минутах)"
               type="number"
-              width="80%"
+              width="100%"
               placeholder="Таймер"
               value={timer}
               onChange={({ target }) => setTimer(target.value)}

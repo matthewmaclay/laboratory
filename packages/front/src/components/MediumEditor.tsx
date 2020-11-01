@@ -7,7 +7,7 @@ import { Flex, InputField } from "bumbag";
 
 const Editor = styled.div`
   outline: none;
-  width: 620px;
+  width: 100%;
   max-width: 620px;
   min-height: 150px;
 `;

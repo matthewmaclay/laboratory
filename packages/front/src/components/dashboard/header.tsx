@@ -76,7 +76,7 @@ const EditorHeader = ({ fun, activeGroupId, isStudent }) => {
           </StyledInput>
         )}
       </StyledBlockStatus>
-      {!isStudent && (
+      {!isStudent && activeGroupId && (
         <StyledBlockButton>
           <Button variant="ghost" color="#E0E4EA">
             Пригласить

@@ -136,7 +136,7 @@ export default function CourseList({ dataTasks, activeGroupId, isStudent, dataUs
     return (
       <StyledCourseList>
         <StyledHeader>
-          <EditorHeader activeGroupId={activeGroupId} fun={handleClick} />
+          <EditorHeader isStudent={isStudent} activeGroupId={activeGroupId} fun={handleClick} />
         </StyledHeader>
         <StyledCars>
           <Flex flexDirection="row" flexWrap="wrap">
