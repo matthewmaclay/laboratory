@@ -278,11 +278,17 @@ mutation updateExercise(
   $timer: Int
   $point: Int
   $description: String
+  $tests: [editComponentNewTestInput]
 ) {
   updateExercise(
     input: {
       where: { id: $id }
-      data: { timer: $timer, description: $description, point: $point }
+      data: {
+        timer: $timer
+        description: $description
+        point: $point
+        tests: $tests
+      }
     }
   ) {
     exercise {

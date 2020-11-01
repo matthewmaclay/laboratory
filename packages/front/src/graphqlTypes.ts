@@ -2689,6 +2689,7 @@ export type UpdateExerciseMutationVariables = Exact<{
   timer?: Maybe<Scalars['Int']>;
   point?: Maybe<Scalars['Int']>;
   description?: Maybe<Scalars['String']>;
+  tests?: Maybe<Array<Maybe<EditComponentNewTestInput>>>;
 }>;
 
 
@@ -3547,8 +3548,8 @@ export type GetExerciseByIdQueryHookResult = ReturnType<typeof useGetExerciseByI
 export type GetExerciseByIdLazyQueryHookResult = ReturnType<typeof useGetExerciseByIdLazyQuery>;
 export type GetExerciseByIdQueryResult = Apollo.QueryResult<GetExerciseByIdQuery, GetExerciseByIdQueryVariables>;
 export const UpdateExerciseDocument = gql`
-    mutation updateExercise($id: ID!, $timer: Int, $point: Int, $description: String) {
-  updateExercise(input: {where: {id: $id}, data: {timer: $timer, description: $description, point: $point}}) {
+    mutation updateExercise($id: ID!, $timer: Int, $point: Int, $description: String, $tests: [editComponentNewTestInput]) {
+  updateExercise(input: {where: {id: $id}, data: {timer: $timer, description: $description, point: $point, tests: $tests}}) {
     exercise {
       id
     }
@@ -3574,6 +3575,7 @@ export type UpdateExerciseMutationFn = Apollo.MutationFunction<UpdateExerciseMut
  *      timer: // value for 'timer'
  *      point: // value for 'point'
  *      description: // value for 'description'
+ *      tests: // value for 'tests'
  *   },
  * });
  */

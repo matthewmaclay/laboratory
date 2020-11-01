@@ -107,7 +107,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
 
               <Modal.Disclosure use={Box}>
                 <Button
-                disabled={!titleNewGroup || !students.length}
+                disabled={!titleNewGroup || !students?.length}
                   onClick={() =>
                     createGroup({
                       variables: {

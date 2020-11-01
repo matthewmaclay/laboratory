@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import style from 'styled-components';
-import { Table, Button } from 'bumbag';
+import { Table, Button, Box } from 'bumbag';
 
 const StyledVariableTable = style.div`
     display: flex;
     flex-direction: column;
-    align-items: start;
+ 
     justify-content: start;
-    width: 700px;
+
 
     input {
 		height: 40px;
@@ -42,7 +42,9 @@ const StyledVariableTable = style.div`
 `
 
 const FirstTable = style.div`
-    display: flex;
+	display: flex;
+	align-items: center;
+	padding-left:5px;
 `
 
 
@@ -80,7 +82,10 @@ const GenerateTable = ( props?: any ) => {
 	}
 
 	const [currentVariables, setVariables] = useState(initialState);
-	React.useEffect(()=>props.onChange(currentVariables),[currentVariables])
+	React.useEffect(()=>props.onChange(generateToJson(currentVariables)),[currentVariables])
+	React.useEffect(()=>{
+		if(props.mock) setVariables(generateState(props.mock))
+	},[props.mock])
 	function generateToJson(state) {
 		const result = [];
 		const allTitle = []
@@ -182,12 +187,16 @@ const GenerateTable = ( props?: any ) => {
 	}
 	  
 	return(
+		<Box>
+
+		
 		<StyledVariableTable>
+			
 		<FirstTable>
 			<Table className="addAnswers" isResponsive >
 				<Table.Head>
 				<Table.Row background="#171C26">
-					<Table.HeadCell color="#E0E4EA">Видимость для ученика</Table.HeadCell>
+					<Table.HeadCell fontSize="10px" color="#E0E4EA">Видимость для ученика</Table.HeadCell>
 					{currentVariables.Head.map((item, i) => {
 					return(
 						<Table.HeadCell key={i} padding="0">
@@ -226,14 +235,15 @@ const GenerateTable = ( props?: any ) => {
 				}
 				</Table.Body>
 			</Table>
-			<Button size="small" className="bottonAdd variable" onClick={addNewVariables}>
+			<Button marginLeft="10px" width="40px" height="40px"  size="small" className="bottonAdd variable" onClick={addNewVariables}>
 					+
 			</ Button>
 		</FirstTable>
-		<Button size="small" className="bottonAdd" onClick={addNewRows} > 
+		<Button alignSelf="center" marginTop="10px" width="40px" height="40px"  size="small" className="bottonAdd" onClick={addNewRows} > 
 				+
 		</Button>
 		</StyledVariableTable>
+		</Box>
 	)
 };
 
