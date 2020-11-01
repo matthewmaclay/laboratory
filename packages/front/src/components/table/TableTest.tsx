@@ -112,8 +112,6 @@ const GenerateTable = ( props?: any ) => {
 		return { tests: result } ;
 	}
 
-	generateToJson(currentVariables)
-
     function addNewVariables() {
         const head = currentVariables.Head;
         head.push('');
