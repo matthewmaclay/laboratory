@@ -31,6 +31,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import Editor from "components/Editor";
 import TableTest from "components/table/TableTest";
+import ButtonLink from "components/ButtonLink";
 
 const TextWrapper = styled.div`
   & .bb-TextBlock {
@@ -89,7 +90,12 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   console.log();
   return (
     <WithSideBar
-      header={<>{activeTask.title}</>}
+      header={
+        <Flex alignItems="center" width="100%" justifyContent="space-between">
+          {activeTask.title}
+          <ButtonLink size="small" href='/signout'>Выйти</ButtonLink>
+        </Flex>
+      }
       lastBlock={
         <Link
           onClick={() => createEmptyExercise({ variables: { taskId: id } })}

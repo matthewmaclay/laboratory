@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Head from "next/head";
-import { Provider as BumbagProvider, css, palette } from "bumbag";
+import { Provider as BumbagProvider, css, palette, ToastManager } from "bumbag";
 // import Pallete from "bumbag/src/theme/palette";
 import { ApolloProvider } from "@apollo/client";
 import { createGlobalStyle } from "styled-components";
@@ -130,6 +130,7 @@ export default function App({ Component, pageProps }: Props) {
           </Head>
           <Component {...pageProps} />
           <GlobalStyle />
+          <ToastManager />
         </BumbagProvider>
       </UserProvider>
     </ApolloProvider>

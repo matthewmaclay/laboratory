@@ -14,6 +14,7 @@ import AvatarWithName from "components/AvatarWithName";
 import { Spinner, Flex, SelectMenu } from "bumbag";
 import styled from "styled-components";
 import CourseList from "../../dashboard/index";
+import ButtonLink from "components/ButtonLink";
 
 const SelectWrapper = styled.div`
   & .bb-SelectMenuItem[aria-selected="true"] {
@@ -64,7 +65,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   console.log(dataTasks, activeGroup);
   return (
     <WithSideBar
-      header={<>{activeGroup?.title || "Выберите группу"}</>}
+      header={
+        <Flex alignItems="center" width="100%" justifyContent="space-between">
+          {activeGroup?.title || "Выберите группу"}
+          <ButtonLink size="small" href="/signout">
+            Выйти
+          </ButtonLink>
+        </Flex>
+      }
       lastBlock={
         <Modal.State animated>
           <Modal.Disclosure use={Link}>+ Добавить группу</Modal.Disclosure>
@@ -99,6 +107,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
 
               <Modal.Disclosure use={Box}>
                 <Button
+                disabled={!titleNewGroup || !students.length}
                   onClick={() =>
                     createGroup({
                       variables: {

@@ -1,5 +1,5 @@
 import SignLayout from "components/layouts/sign";
-import { Input, InputField, Button } from "bumbag";
+import { Input, InputField, Button, useToasts } from "bumbag";
 import React from "react";
 import ButtonLink from "components/ButtonLink";
 import { useForm } from "react-hook-form";
@@ -9,8 +9,21 @@ import { useRouter } from "next/router";
 
 const SignInPage = () => {
   const router = useRouter();
+  const toasts = useToasts();
   const { register, handleSubmit, errors, getValues } = useForm();
-  const [registration, { data, error, loading }] = useRegisterMutation();
+  const [registration, { data, error, loading }] = useRegisterMutation({
+    onCompleted: () => {
+      toasts.success({
+        title: "Успешная регистрация",
+      });
+    },
+    onError: () => {
+      toasts.danger({
+        title: "Ошибка регистрации",
+        message: "Проверьте правильность введенного email и пароля",
+      });
+    },
+  });
   React.useEffect(() => {
     if (data?.register?.jwt) router.push("/signin");
   }, [data]);

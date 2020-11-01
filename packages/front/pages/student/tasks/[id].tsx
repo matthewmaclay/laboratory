@@ -9,6 +9,7 @@ import {
   InputField,
   Divider,
   Text,
+  ToastManager
 } from "bumbag";
 import LinkNext from "next/link";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -32,6 +33,7 @@ import { useRouter } from "next/router";
 import Editor from "components/Editor";
 import TableTest from "components/table/TableTest";
 import CodeEditor from "components/NoSSRCodeEditor";
+import ButtonLink from "components/ButtonLink";
 
 const TextWrapper = styled.div`
   & .bb-TextBlock {
@@ -39,10 +41,9 @@ const TextWrapper = styled.div`
   }
 `;
 
-
-
 const IndexTeacherPage: React.FC = ({ children }) => {
   const [description, setDescription] = useState<string>();
+  const [tests, setTests] = useState<string>(); // ТАБЛИЦА ДЛЯ ТЕСТОВ У УЧЕНИКА
 
   const { query } = useRouter();
   const id = query.id as string;
@@ -54,8 +55,10 @@ const IndexTeacherPage: React.FC = ({ children }) => {
         (i) => i.id === activeTask.id
       );
       setDescription(exercise.description);
+      setTests(exercise.tests);
     }
   }, [activeTask.id]);
+  console.log(tests)
   const {
     data: dataExercises,
     refetch: refetchExercises,
@@ -69,7 +72,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
 
   return (
     <WithSideBar
-      header={<>{activeTask.title}</>}
+      header={
+        <Flex alignItems="center" width="100%" justifyContent="space-between">
+          {activeTask.title}
+          <ButtonLink size="small" href="/signout">
+            Выйти
+          </ButtonLink>
+        </Flex>
+      }
       blocks={[
         <Flex flexDirection="column">
           <LinkNext href="/">

@@ -4,7 +4,7 @@ import { Modal, Card, Button, Box, Link, Heading, InputField } from "bumbag";
 import WithSideBar from "components/layout/WithSideBar";
 import {
   useCreateGroupMutation,
-    useGetGroupsWhereIamStudentQuery,
+  useGetGroupsWhereIamStudentQuery,
   useGetGroupsWhereIamTeacherQuery,
   useGetStudentsQuery,
   useGetTasksByGroupIdQuery,
@@ -13,7 +13,8 @@ import { UserContext } from "components/providers/UserProvider";
 import AvatarWithName from "components/AvatarWithName";
 import { Spinner, Flex, SelectMenu } from "bumbag";
 import styled from "styled-components";
-import CourseList from '../../dashboard/index';
+import CourseList from "../../dashboard/index";
+import ButtonLink from "components/ButtonLink";
 
 const SelectWrapper = styled.div`
   & .bb-SelectMenuItem[aria-selected="true"] {
@@ -33,7 +34,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { teacher, avatar, firstName, id } = useContext(UserContext);
   const { data: dataTasks } = useGetTasksByGroupIdQuery({
     variables: { groupId: activeGroup.id || "notId" },
-    fetchPolicy:"network-only"
+    fetchPolicy: "network-only",
   });
   const {
     data,
@@ -51,12 +52,19 @@ const IndexTeacherPage: React.FC = ({ children }) => {
     },
   });
   useEffect(() => {
-    data && data.groups.length &&  setActiveGroup(data.groups[0]);
+    data && data.groups.length && setActiveGroup(data.groups[0]);
   }, [data]);
- 
+
   return (
     <WithSideBar
-      header={<>{activeGroup?.title || "Выберите группу"}</>}
+      header={
+        <Flex alignItems="center" width="100%" justifyContent="space-between">
+          {activeGroup?.title || "Выберите группу"}
+          <ButtonLink size="small" href="/signout">
+            Выйти
+          </ButtonLink>
+        </Flex>
+      }
       blocks={[
         <AvatarWithName img={avatar} name={`${firstName}`} />,
         <div>
@@ -88,7 +96,11 @@ const IndexTeacherPage: React.FC = ({ children }) => {
       ]}
     >
       <Box width="100%">
-        <CourseList isStudent activeGroupId={activeGroup.id} dataTasks={dataTasks}/>
+        <CourseList
+          isStudent
+          activeGroupId={activeGroup.id}
+          dataTasks={dataTasks}
+        />
       </Box>
     </WithSideBar>
   );
