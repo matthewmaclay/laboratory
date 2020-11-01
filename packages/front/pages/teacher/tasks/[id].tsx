@@ -45,6 +45,7 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const [copyDescription, setCopyDescription] = useState<string>();
   const [timer, setTimer] = useState<number>();
   const [point, setPoint] = useState<number>();
+  const [testsFromTable, setTestsFromTable] = useState();
 
   const { query } = useRouter();
   const id = query.id as string;
@@ -87,13 +88,15 @@ const IndexTeacherPage: React.FC = ({ children }) => {
   const { data: dataExercise } = useGetExerciseByIdQuery({
     variables: { id: activeTask.id },
   });
-  console.log();
+  console.log(testsFromTable);
   return (
     <WithSideBar
       header={
         <Flex alignItems="center" width="100%" justifyContent="space-between">
           {activeTask.title}
-          <ButtonLink size="small" href='/signout'>Выйти</ButtonLink>
+          <ButtonLink size="small" href="/signout">
+            Выйти
+          </ButtonLink>
         </Flex>
       }
       lastBlock={
@@ -149,9 +152,15 @@ const IndexTeacherPage: React.FC = ({ children }) => {
               Таблица проверки решения ученика
             </Heading>
             <Text opacity="0.6" marginBottom="20px">
-              Эта какая-то таблица и она как-то работает
+    
+              <strong>Нижний плюс</strong> добавляет экземпляр теста <br />
+              <strong>Плюс справа</strong> добавляет аргумент в тестируемой функции <br /><br />
+              Задайте описание в хэдере для каждого нового аргумента и запоните таблицу<br /> 
+              Колонка "Видимость" управляет сэмплами для ученика
             </Text>
-            {tests && <TableTest mock={tests}></TableTest>}
+            {tests && (
+              <TableTest onChange={setTestsFromTable} mock={tests}></TableTest>
+            )}
           </Flex>
         )
       }
@@ -189,12 +198,14 @@ const IndexTeacherPage: React.FC = ({ children }) => {
           </TextWrapper>
           <Button
             onClick={() => {
+              
               updateExercise({
                 variables: {
                   timer: +timer,
                   description,
                   point: +point,
                   id: activeTask.id,
+                  tests: testsFromTable.tests,
                 },
               });
             }}

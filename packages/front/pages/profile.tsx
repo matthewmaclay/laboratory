@@ -31,9 +31,14 @@ const ChooseRole = () => {
   const [role, setRole] = React.useState("");
   const [first, setFirst] = React.useState("");
   const [last, setLast] = React.useState("");
+  const [organization, setOrganization] = React.useState("");
+  const [birthday, setBirthday] = React.useState("");
   const [patr, setPatr] = React.useState("");
   const [theme, setTheme] = React.useState("");
-  const { register, handleSubmit, errors, getValues } = useForm();
+  const { register, handleSubmit, errors, getValues } = useForm({
+    reValidateMode: "onChange",
+  });
+  console.log(getValues())
   const { data } = useGetUserQuery({
     variables: { id: getUserId() },
     ssr: false,
@@ -43,9 +48,9 @@ const ChooseRole = () => {
   }, [data]);
   const [updateUser] = useUpdateUserMutation({
     onCompleted: () => {
-      router.push("/")
-      window.localStorage.setItem('refetchUser', 'true')
-    }
+      router.push("/");
+      window.localStorage.setItem("refetchUser", "true");
+    },
   });
   const onSubmit = () => {
     const {
@@ -77,7 +82,7 @@ const ChooseRole = () => {
   const avatar = `https://avatars.dicebear.com/api/bottts/${encodeURI(
     first + last + patr
   )}.svg?mood[]=happy`;
-  console.log(first, last, patr, avatar);
+
   return (
     <SignLayout header="Заполните информацию о вас">
       <Flex justifyContent="center">
@@ -122,17 +127,31 @@ const ChooseRole = () => {
       <InputField
         type="date"
         inputRef={register}
+        onChange={({ target }) => setBirthday(target.value)}
         name="birthday"
         label="Дата рождения"
       />
       <InputField
         type="text"
         inputRef={register}
+        onChange={({ target }) => setOrganization(target.value)}
         name="organization"
         label="Образовательная организация"
       />
 
-      <Button disabled={!role} width="100%" onClick={onSubmit}>
+      <Button
+        disabled={
+          !first ||
+          !last ||
+          !patr ||
+          !avatar ||
+          !role ||
+          !birthday ||
+          !organization
+        }
+        width="100%"
+        onClick={onSubmit}
+      >
         Сохранить
       </Button>
     </SignLayout>

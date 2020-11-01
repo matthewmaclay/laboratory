@@ -80,7 +80,7 @@ const GenerateTable = ( props?: any ) => {
 	}
 
 	const [currentVariables, setVariables] = useState(initialState);
-
+	React.useEffect(()=>props.onChange(currentVariables),[currentVariables])
 	function generateToJson(state) {
 		const result = [];
 		const allTitle = []
