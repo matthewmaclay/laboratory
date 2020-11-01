@@ -1,4 +1,16 @@
-# Labaratory
+# Laboratory
+
+## Стенды
+Приложение доступно по следующим адресам:
+
+[https://hack.dokub.xyz](https://hack.dokub.xyz) - временный домен для фронта
+
+[https://admin.hack.dokub.xyz](https://admin.hack.dokub.xyz) - временный домен для админки strapi
+
+[https://hack.dokub.xyz/api/check](https://hack.dokub.xyz/api/check) - временный роут для запуска кода ученика. Принимает **POST** с **Json Data** которая указана ниже
+***
+
+## Архитектура
 
 
 Приложение разбито на микросервисы, но на текущий момент хранится в монорепе(./packages). Для каждого из них написан Dockerfile:
@@ -14,6 +26,7 @@
 
 Для python-api временно используется **docker.sock (dind)** для сборки контейнеров для тестов и их выполнения.
 ***
+## Запуск
 **Так как docker-compose багнулся и не позволяет собрать билды с явным указанием Dockerfile, перед запуском compose необходимо сбилдить образы**
 
 
@@ -41,16 +54,9 @@ docker service update hack_front --image front:latest --force
 ```
 **На репо запущен github actions. Поэтому при пуше в репо этот процесс запускается автоматически.**
 ***
-Приложение доступно по следующим адресам:
 
-[https://hack.dokub.xyz](https://hack.dokub.xyz) - временный домен для фронта
+## API для теста кода
 
-[https://admin.hack.dokub.xyz](https://admin.hack.dokub.xyz) - временный домен для админки strapi
-
-[https://hack.dokub.xyz/api/check](https://hack.dokub.xyz/api/check) - временный роут для запуска кода ученика. Принимает **POST** с **Json Data** которая указана ниже
-
-
-***
 *Пример json data для заведенной задачи:*
 ```json
 {
@@ -59,7 +65,7 @@ docker service update hack_front --image front:latest --force
     "script": "def runTest(a,b):\n  return a+b"
 }
 ```
----
+
 **Пример запроса с правильным решением:**
 ```bash
 ~$ curl -X POST "https://hack.dokub.xyz/api/check" -d '{"id":1, "language": "python", "script": "def runTest(a,b):\n  return a+b"}'
